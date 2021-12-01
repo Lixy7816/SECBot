@@ -4,7 +4,7 @@
       <div class="item item-left">
         <avatar
           :username="username"
-          background-color="#fff"
+          background-color="#00CED1"
           color="rgb(255, 208, 75)"
         ></avatar>
         <div class="bubble bubble-left">

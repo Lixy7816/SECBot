@@ -34,7 +34,7 @@ export default {
         },
         {
           pk: 1,
-          username: "马冀",
+          username: "S马冀",
           text: "你好啊",
           pos: true
         }
