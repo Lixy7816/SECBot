@@ -23,12 +23,12 @@ export default {
         pk: 0,
         username: '李浩',
         text: '你好',
-        pos: false
+        pos: 0
       },{
         pk: 1,
         username: '马冀',
         text: '你好啊',
-        pos: true
+        pos: 1
       }]
     }
   }

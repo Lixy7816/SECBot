@@ -1,10 +1,6 @@
 <template>
   <div class="container">
     <div class="content">
-      <div class="item item-center"><span>昨天 12:35</span></div>
-      <div class="item item-center">
-        <span>你已添加了马冀，现在可以开始聊天了。</span>
-      </div>
       <ChatList v-bind:chatList="chatlist" />
     </div>
     <div class="input-area">
@@ -28,15 +24,27 @@ export default {
       chatlist: [
         {
           pk: 0,
-          username: "李浩",
-          text: "你好",
-          pos: false
+          username: "server",
+          text: "昨天 12:35",
+          pos: 2
         },
         {
           pk: 1,
+          username: "server",
+          text: "你已添加了马冀，现在可以开始聊天了。",
+          pos: 2
+        },
+        {
+          pk: 2,
+          username: "李浩",
+          text: "你好",
+          pos: 0
+        },
+        {
+          pk: 3,
           username: "S马冀",
           text: "你好啊",
-          pos: true
+          pos: 1
         }
       ],
       msg: "Welcome to Your Vue.js App"
@@ -58,7 +66,7 @@ export default {
       var json = {};
       json.text = text;
       json.username = "李浩";
-      json.pos = false;
+      json.pos = 0;
       json.pk = this.chatlist.length;
       this.chatlist.push(json);
 
@@ -70,7 +78,7 @@ export default {
             var rjson = {};
             rjson.text = Response.data.text;
             rjson.username = "马冀";
-            rjson.pos = true;
+            rjson.pos = 1;
             rjson.pk = this.chatlist.length;
             this.chatlist.push(rjson);
             console.log("chatlist:", this.chatlist);

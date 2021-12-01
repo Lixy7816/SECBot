@@ -1,6 +1,6 @@
 <template>
   <div id="chatBox">
-    <div v-if="pos">
+    <div v-if="pos===1">
       <div class="item item-left">
         <avatar
           :username="username"
@@ -12,8 +12,7 @@
         </div>
       </div>
     </div>
-
-    <div v-if="!pos">
+    <div v-else-if="pos===0">
       <div class="item item-right">
         <div class="bubble bubble-right">
           {{ text }}
@@ -23,6 +22,11 @@
           background-color="#fff"
           color="rgb(255, 208, 75)"
         ></avatar>
+      </div>
+    </div>
+    <div v-else>
+      <div class="item item-center">
+        <span>{{ text }}</span>
       </div>
     </div>
   </div>
@@ -45,10 +49,10 @@ export default {
       type: String,
       default: () => "hello world"
     },
-    // pos为ture:右边(服务器的消息);false:左边(用户的消息)
+    // pos代表消息的位置,pos == 0,表示为右边(用户的消息),pos == 1,表示为左边(服务器的消息),pos == 其他,表示为中间(提示消息);
     pos: {
-      type: Boolean,
-      default: () => true
+      type: Number,
+      default: () => 2
     }
   },
   data() {
