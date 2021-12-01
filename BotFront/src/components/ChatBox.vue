@@ -33,21 +33,21 @@
 </template>
 
 <script>
-import Avatar from "vue-avatar";
+import Avatar from 'vue-avatar';
 
 export default {
-  name: "ChatBox",
+  name: 'ChatBox',
   components: {
     Avatar
   },
   props: {
     username: {
       type: String,
-      default: () => "username"
+      default: () => 'username'
     },
     text: {
       type: String,
-      default: () => "hello world"
+      default: () => 'hello world'
     },
     // pos代表消息的位置,pos == 0,表示为右边(用户的消息),pos == 1,表示为左边(服务器的消息),pos == 其他,表示为中间(提示消息);
     pos: {

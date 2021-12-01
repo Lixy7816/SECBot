@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import ChatBox from '@/components/ChatBox'
+import ChatBox from '@/components/ChatBox';
+
 export default {
   name: 'ChatList',
   components: {
@@ -24,7 +25,7 @@ export default {
         username: '李浩',
         text: '你好',
         pos: 0
-      },{
+      }, {
         pk: 1,
         username: '马冀',
         text: '你好啊',
@@ -32,5 +33,5 @@ export default {
       }]
     }
   }
-}
+};
 </script>

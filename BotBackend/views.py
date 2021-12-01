@@ -81,14 +81,3 @@ def chat(request):
         'text': chat_reply
     }))
     return reply
-
- 
-# if __name__ == '__main__':
-#     while True:
-#         chat_input = input("请输入:")
-#         print(chat_input)
-#         chat_reply = unit_chat(chat_input)
-#         print("用户输入 >>>", chat_input)
-#         print("Unit回复 >>>", chat_reply)
-#         if chat_input == 'Q' or chat_input == 'q':
-#             break

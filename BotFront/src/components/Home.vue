@@ -13,41 +13,41 @@
 </template>
 
 <script>
-import Avatar from "vue-avatar";
-import ChatList from "@/components/ChatList";
-import { sendMessage } from "@/utils/communications";
+import Avatar from 'vue-avatar';
+import ChatList from '@/components/ChatList';
+import sendMessage from '@/utils/communications';
 
 export default {
-  name: "HelloWorld",
+  name: 'Home',
   data() {
     return {
       chatlist: [
         {
           pk: 0,
-          username: "server",
-          text: "昨天 12:35",
+          username: 'server',
+          text: '昨天 12:35',
           pos: 2
         },
         {
           pk: 1,
-          username: "server",
-          text: "你已添加了马冀，现在可以开始聊天了。",
+          username: 'server',
+          text: '你已添加了马冀，现在可以开始聊天了。',
           pos: 2
         },
         {
           pk: 2,
-          username: "李浩",
-          text: "你好",
+          username: '李浩',
+          text: '你好',
           pos: 0
         },
         {
           pk: 3,
-          username: "S马冀",
-          text: "你好啊",
+          username: 'S马冀',
+          text: '你好啊',
           pos: 1
         }
       ],
-      msg: "Welcome to Your Vue.js App"
+      msg: 'Welcome to Your Vue.js App'
     };
   },
   components: {
@@ -55,55 +55,56 @@ export default {
     ChatList
   },
   methods: {
-    send: function() {
-      let text = document.querySelector("#textarea").value;
+    send: function send() {
+      let text = document.querySelector('#textarea').value;
       if (!text) {
-        alert("请输入内容");
+        alert('请输入内容');
         return;
       }
 
       // 发送消息
-      var json = {};
+      let json = {};
       json.text = text;
-      json.username = "李浩";
+      json.username = '李浩';
       json.pos = 0;
       json.pk = this.chatlist.length;
       this.chatlist.push(json);
 
       // 消息传递给后端
       sendMessage(text).then(
-        Response => {
+        (Response) => {
           if (Response.status === 200 && Response.data.code === 200) {
-            console.log("Get Response", Response.data.text);
-            var rjson = {};
+            console.log('Get Response', Response.data.text);
+            let rjson = {};
             rjson.text = Response.data.text;
-            rjson.username = "马冀";
+            rjson.username = '马冀';
             rjson.pos = 1;
             rjson.pk = this.chatlist.length;
             this.chatlist.push(rjson);
-            console.log("chatlist:", this.chatlist);
+            console.log('chatlist:', this.chatlist);
           } else {
-            console.log("Error Response");
+            console.log('Error Response');
           }
         },
-        error => {
-          console.log("No Response Error!");
+        (error) => {
+          console.log('No Response Error!', error);
         }
       );
 
-      document.querySelector("#textarea").value = "";
-      document.querySelector("#textarea").focus();
-      //滚动条还有问题
-      let height = document.querySelector(".content").scrollHeight;
-      document.querySelector(".content").scrollTop = height * 10;
-      console.log(height)
+      document.querySelector('#textarea').value = '';
+      document.querySelector('#textarea').focus();
+      // TODO: 滚动条还有问题
+      let height = document.querySelector('.content').scrollHeight;
+      document.querySelector('.content').scrollTop = height * 10;
+      console.log(height);
     }
   },
   created() {
-    let that = this;
-    document.onkeyup = function(e) {
-      e = window.event || e;
-      if (event.ctrlKey && e.keyCode == 13) {
+    // 快捷键绑定:ctrl + Enter发送消息
+    const that = this;
+    document.onkeyup = function Sckey(e) {
+      const e1 = window.event || e;
+      if (event.ctrlKey && e1.keyCode === 13) {
         that.send();
       }
     };

@@ -10,8 +10,8 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      meta:{
-        // 
+      meta: {
+        // 网页标题
         title: 'SECBot聊天区'
       }
     },
