@@ -62,7 +62,7 @@ export default {
         return;
       }
 
-      // 发送消息
+      // 发送消息 
       let json = {};
       json.text = text;
       json.username = '李浩';
