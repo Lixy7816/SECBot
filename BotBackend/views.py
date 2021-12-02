@@ -3,7 +3,7 @@ import json
 import random
 import requests
 from django.shortcuts import HttpResponse
- 
+
 # client_id 为官网获取的AK， client_secret 为官网获取的SK
 client_id = "Z3azDuZsqFG888EubjoR1yOR"
 client_secret = "lFqdE8jVm6DgCCwjeTEFfehrt0g1322q"
