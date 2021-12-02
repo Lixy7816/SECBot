@@ -42,7 +42,7 @@ export default {
         },
         {
           pk: 3,
-          username: 'S马冀',
+          username: '马冀',
           text: '你好啊',
           pos: 1
         }
