@@ -123,15 +123,6 @@ export default {
       userConnectVisible: false,
       dialogVisible_logout: false,
       ustate: ustore.state,
-      botnames: {
-        type: Array,
-        default: () => [
-          "SECBot-小闲",
-          "SECBot-小诗",
-          "SECBot-小问",
-          "SECBot-小影"
-        ]
-      }
     };
   },
   methods: {
@@ -182,7 +173,8 @@ export default {
     choseABot: function choseABot(index) {
       this.DrawVisible = true;
       console.log("HOME CHOSEBOT", index, this.DrawVisible);
-      ustore.set_bot(this.botnames[index-1]);
+      ustore.set_bot(index);
+      console.log("Home ustore:",ustore.state);
     },
     login: function login(username, password) {
       this.userConnectVisible = true;
