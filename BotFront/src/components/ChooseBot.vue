@@ -4,7 +4,7 @@
   <el-row :gutter="20">
     <el-col :span="6" :offset="3">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
-        <img src="../assets/闲聊.jpeg" class="image" alt=""/>
+        <img src="../assets/chat.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
             <el-button type="text" class="button">闲聊</el-button>
@@ -15,7 +15,7 @@
     
     <el-col :span="6">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
-        <img src="../assets/诗词.jpeg" class="image" alt=""/>
+        <img src="../assets/poem.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
             <el-button type="text" class="button">诗词</el-button>
@@ -27,7 +27,7 @@
     
     <el-col :span="6">
       <el-card :body-style="{padding: '10px'}" shadow="hover">
-        <img src="../assets/问答.jpeg" class="image" alt=""/>
+        <img src="../assets/Q_A.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
             <el-button type="text" class="button">问答</el-button>
@@ -40,7 +40,7 @@
     <el-row :gutter="20">
     <el-col :span="6" :offset="6">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
-        <img src="../assets/影视.jpeg" class="image" alt=""/>
+        <img src="../assets/film.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
             <el-button type="text" class="button">影视</el-button>
