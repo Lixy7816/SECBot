@@ -25,12 +25,12 @@ export default {
     }
   },
   methods: {
-    cancel: function () {
-      this.$emit('cancel')
+    cancel: function cancel() {
+      this.$emit('cancel');
     },
-    confirm: function () {
-      this.$emit('confirm')
+    confirm: function confirm() {
+      this.$emit('confirm');
     }
   }
-}
+};
 </script>

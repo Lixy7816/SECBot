@@ -39,7 +39,7 @@ export default {
       default: () => false
     }
   },
-  data () {
+  data() {
     return {
       ruleForm: {
         username: '',
@@ -53,26 +53,26 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       }
-    }
+    };
   },
   methods: {
-    signup: function () {
-      this.$emit('signup')
+    signup: function signup() {
+      this.$emit('signup');
     },
-    cancel: function () {
-      this.$emit('cancel')
+    cancel: function cancel() {
+      this.$emit('cancel');
     },
-    confirm: function (formName) {
+    confirm: function confirm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$emit('confirm', this.ruleForm.username, this.ruleForm.password)
-        } else {
-          return false
+          this.$emit('confirm', this.ruleForm.username, this.ruleForm.password);
+          return true;
         }
-      })
+        return false;
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
