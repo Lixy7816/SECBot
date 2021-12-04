@@ -52,6 +52,7 @@ module.exports = {
     "prefer-const": ["off"],
     'no-unused-vars':['warn'],
     'no-console': ['off'],
-    'no-alert': ["off"]
+    'no-alert': ["off"],
+    'max-len': ["off"]
   }
 }

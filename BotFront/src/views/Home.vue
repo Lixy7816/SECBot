@@ -10,7 +10,7 @@
         <el-menu-item v-if= "!ustate.online" index="2" v-on:click = "DialogVisible = 2" class="loginpage">登录</el-menu-item>
         <el-menu-item v-if= "ustate.online" index="3" v-on:click = "DialogVisible = 3" class="changePw">修改密码</el-menu-item>
         <el-menu-item v-if= "ustate.online" index="4" v-on:click= "DialogVisible = 4" class="logout">退出登录</el-menu-item>
-        <el-menu-item index="5" >{{ustate.username}}</el-menu-item>
+        <el-menu-item index="5" >{{用户名}}</el-menu-item>
       </el-menu>
       </el-header>
       <el-main>
@@ -27,25 +27,16 @@
 
 export default {
   name: 'Home',
-  components: {
-    Querybar,
-    Signup,
-    Login,
-    ChangePw,
-    ConfirmLogout
-  },
-  data () {
+  data() {
     return {
       query: '',
       DialogVisible: 0,
       loadingVisible: false,
       userConnectVisible: false,
       dialogVisible_logout: false,
-    }
-  },
-  methods: {
+    };
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

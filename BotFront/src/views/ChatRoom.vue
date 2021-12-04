@@ -23,7 +23,7 @@
 <script>
 import Avatar from 'vue-avatar';
 import ChatList from '@/components/ChatList';
-import sendMessage from '@/utils/communications';
+import { sendMessage } from '@/utils/communications';
 
 export default {
   name: 'Home',
