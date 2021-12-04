@@ -26,7 +26,7 @@ import ChatList from '@/components/ChatList';
 import { sendMessage } from '@/utils/communications';
 
 export default {
-  name: 'Home',
+  name: 'ChatRoom',
   data() {
     return {
       username: '李浩',
