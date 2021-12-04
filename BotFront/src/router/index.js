@@ -12,7 +12,7 @@ export default new Router({
       component: Home,
       meta: {
         // 网页标题
-        title: 'SECBot聊天区'
+        title: 'SECBots聊天室'
       }
     },
   ],

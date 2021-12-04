@@ -33,10 +33,6 @@ export default {
     };
   },
   props: {
-    username: {
-      type: String,
-      default: () => 'Lixy'
-    },
     chatlist: {
       type: Array,
       default: () => [
@@ -73,7 +69,6 @@ export default {
   },
   methods: {
     send: function send() {
-      console.log('ustore:', this.state);
       let text = document.querySelector('#textarea').value;
       if (!text) {
         alert('请输入内容');
@@ -83,29 +78,30 @@ export default {
       // 发送消息
       let json = {};
       json.text = text;
-      json.username = '李浩';
+      json.username = this.ustate.username;
       json.pos = 0;
       json.pk = this.chatlist.length;
       this.chatlist.push(json);
 
+      // console.log('ChatRoom ustore:', this.ustate);
       // 消息传递给后端
-      sendMessage(text).then(
+      sendMessage(text,this.ustate.botindex).then(
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
-            console.log('Get Response', Response.data.text);
+            // console.log('Get Response', Response.data.text);
             let rjson = {};
             rjson.text = Response.data.text;
-            rjson.username = '小诗';
+            rjson.username = this.ustate.botname.slice(8);
             rjson.pos = 1;
             rjson.pk = this.chatlist.length;
             this.chatlist.push(rjson);
-            console.log('chatlist:', this.chatlist);
+            // console.log('chatlist:', this.chatlist);
           } else {
-            console.log('Error Response');
+            // console.log('Error Response');
           }
         },
         error => {
-          console.log('No Response Error!', error);
+          // console.log('No Response Error!', error);
         }
       );
 
@@ -114,9 +110,11 @@ export default {
       // TODO: 滚动条还有问题
       let height = document.querySelector('.content').scrollHeight;
       document.querySelector('.content').scrollTop = height * 10;
-      console.log(height);
+      // console.log(height);
     },
     goBack: function goBack() {
+      // TODO:将清空数据改为逐个保存
+      this.chatlist = [];
       this.$emit('back');
     }
   },

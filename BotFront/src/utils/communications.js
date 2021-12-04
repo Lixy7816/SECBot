@@ -3,9 +3,10 @@ import axios from 'axios';
 import API from '@/utils/API';
 
 // 发送信息
-export function sendMessage(_text) {
+export function sendMessage(_text, _botindex) {
   return axios.post(API.COMUNICATE.path, {
-    text: _text
+    text: _text,
+    botindex: _botindex
   });
 }
 

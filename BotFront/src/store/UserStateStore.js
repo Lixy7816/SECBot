@@ -7,14 +7,16 @@ export const botnames = [
 
 export var ustore = {
   state: {
-    username: '请登录',
+    username: 'Lixy',
     botname: '小闲',
+    botindex: 1,
     online: false
   },
   set_user(newValue) {
     this.state.username = newValue;
   },
   set_bot(newValue) {
+    this.state.botindex = newValue-1;
     this.state.botname = botnames[newValue - 1];
   },
   set_online(newValue) {
