@@ -7,7 +7,7 @@
         <img src="../assets/chat.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
-            <el-button type="text" class="button">闲聊</el-button>
+            <el-button type="text" class="button" v-on:click="chooseABot(1)">闲聊</el-button>
           </div>
         </div>
       </el-card>
@@ -18,7 +18,7 @@
         <img src="../assets/poem.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
-            <el-button type="text" class="button">诗词</el-button>
+            <el-button type="text" class="button" v-on:click="chooseABot(2)">诗词</el-button>
           </div>
         </div>
       </el-card>
@@ -30,7 +30,7 @@
         <img src="../assets/Q_A.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
-            <el-button type="text" class="button">问答</el-button>
+            <el-button type="text" class="button" v-on:click="chooseABot(3)">问答</el-button>
           </div>
         </div>
       </el-card>
@@ -43,7 +43,7 @@
         <img src="../assets/film.jpeg" class="image" alt=""/>
         <div class="undpic">
           <div class="bottom clearfix">
-            <el-button type="text" class="button">影视</el-button>
+            <el-button type="text" class="button" v-on:click="chooseABot(4)">影视</el-button>
           </div>
         </div>
       </el-card>
@@ -64,7 +64,13 @@
 
 <script>
 export default {
-  name: "ChooseBot"
+  name: "ChooseBot",
+  methods: {
+    chooseABot(index){
+      console.log("chooseABot",index);
+      this.$emit('choseABot',index);
+    }
+  }
 };
 </script>
 
