@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+    <div class="cheader">
+      <header align="center">
+        SECBot-{{botname}}
+      </header>
+      <hr />
+    </div>
     <div class="content">
       <ChatList v-bind:chatList="chatlist" />
     </div>
@@ -21,6 +27,8 @@ export default {
   name: 'Home',
   data() {
     return {
+      username: '李浩',
+      botname: '小诗',
       chatlist: [
         {
           pk: 0,
@@ -31,7 +39,7 @@ export default {
         {
           pk: 1,
           username: 'server',
-          text: '你已添加了马冀，现在可以开始聊天了。',
+          text: '你已添加了小诗，现在可以开始聊天了。',
           pos: 2
         },
         {
@@ -42,7 +50,7 @@ export default {
         },
         {
           pk: 3,
-          username: '马冀',
+          username: '小诗',
           text: '你好啊',
           pos: 1
         }
@@ -77,7 +85,7 @@ export default {
             console.log('Get Response', Response.data.text);
             let rjson = {};
             rjson.text = Response.data.text;
-            rjson.username = '马冀';
+            rjson.username = '小诗';
             rjson.pos = 1;
             rjson.pk = this.chatlist.length;
             this.chatlist.push(rjson);
@@ -151,9 +159,14 @@ body {
   flex-flow: column;
   overflow: hidden;
 }
+.cheader {
+  width: calc(100% - 40px);
+  height: auto;
+  padding: 20px 5px 10px;
+}
 .content {
   width: calc(100% - 40px);
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   overflow-y: scroll;
   flex: 1;
 }
