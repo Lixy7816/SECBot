@@ -2,8 +2,8 @@
   <div id="home">
     <div class="container">
       <div class="cheader">
-      <el-page-header @back="goBack" v-bind:content="botname">
-      </el-page-header>
+        <el-page-header @back="goBack"  v-bind:content="ustate.botname">
+        </el-page-header>
       </div>
       <el-divider />
       <div class="content">
@@ -20,44 +20,52 @@
 </template>
 
 <script>
-import Avatar from 'vue-avatar';
-import ChatList from '@/components/ChatList';
-import { sendMessage } from '@/utils/communications';
+import Avatar from "vue-avatar";
+import ChatList from "@/components/ChatList";
+import { ustore } from '@/store/UserStateStore';
+import { sendMessage } from "@/utils/communications";
 
 export default {
-  name: 'ChatRoom',
+  name: "ChatRoom",
   data() {
     return {
-      username: '李浩',
-      botname: 'SECBot-小诗',
-      chatlist: [
-        {
-          pk: 0,
-          username: 'server',
-          text: '昨天 12:35',
-          pos: 2
-        },
-        {
-          pk: 1,
-          username: 'server',
-          text: '你已添加了小诗，现在可以开始聊天了。',
-          pos: 2
-        },
-        {
-          pk: 2,
-          username: '李浩',
-          text: '你好',
-          pos: 0
-        },
-        {
-          pk: 3,
-          username: '小诗',
-          text: '你好啊',
-          pos: 1
-        }
-      ],
-      msg: 'Welcome to Your Vue.js App'
-    };
+      ustate: ustore.state
+    }
+  },
+  props: {
+    username: {
+      type: String,
+      default: () => "Lixy"
+    },
+    chatlist: {
+      type: Array,
+      default: () => [
+        // {
+        //   pk: 0,
+        //   username: "server",
+        //   text: "昨天 12:35",
+        //   pos: 2
+        // },
+        // {
+        //   pk: 1,
+        //   username: "server",
+        //   text: "你已添加了小诗，现在可以开始聊天了。",
+        //   pos: 2
+        // },
+        // {
+        //   pk: 2,
+        //   username: "Lixy",
+        //   text: "你好",
+        //   pos: 0
+        // },
+        // {
+        //   pk: 3,
+        //   username: "诗",
+        //   text: "你好啊",
+        //   pos: 1
+        // }
+      ]
+    }
   },
   components: {
     Avatar,
@@ -65,50 +73,51 @@ export default {
   },
   methods: {
     send: function send() {
-      let text = document.querySelector('#textarea').value;
+      console.log("ustore:",this.state)
+      let text = document.querySelector("#textarea").value;
       if (!text) {
-        alert('请输入内容');
+        alert("请输入内容");
         return;
       }
 
       // 发送消息
       let json = {};
       json.text = text;
-      json.username = '李浩';
+      json.username = "李浩";
       json.pos = 0;
       json.pk = this.chatlist.length;
       this.chatlist.push(json);
 
       // 消息传递给后端
       sendMessage(text).then(
-        (Response) => {
+        Response => {
           if (Response.status === 200 && Response.data.code === 200) {
-            console.log('Get Response', Response.data.text);
+            console.log("Get Response", Response.data.text);
             let rjson = {};
             rjson.text = Response.data.text;
-            rjson.username = '小诗';
+            rjson.username = "小诗";
             rjson.pos = 1;
             rjson.pk = this.chatlist.length;
             this.chatlist.push(rjson);
-            console.log('chatlist:', this.chatlist);
+            console.log("chatlist:", this.chatlist);
           } else {
-            console.log('Error Response');
+            console.log("Error Response");
           }
         },
-        (error) => {
-          console.log('No Response Error!', error);
+        error => {
+          console.log("No Response Error!", error);
         }
       );
 
-      document.querySelector('#textarea').value = '';
-      document.querySelector('#textarea').focus();
+      document.querySelector("#textarea").value = "";
+      document.querySelector("#textarea").focus();
       // TODO: 滚动条还有问题
-      let height = document.querySelector('.content').scrollHeight;
-      document.querySelector('.content').scrollTop = height * 10;
+      let height = document.querySelector(".content").scrollHeight;
+      document.querySelector(".content").scrollTop = height * 10;
       console.log(height);
     },
-    goBack: function goBack(){
-      this.$emit('back');
+    goBack: function goBack() {
+      this.$emit("back");
     }
   },
   created() {
@@ -220,12 +229,12 @@ textarea {
   background: rgba(0, 0, 0, 0);
   box-shadow: inset006pxrgba(0, 0, 0, 0.5);
 }
-#home{
-  background:url("../assets/background.jpeg");
-  background-size:100% 100%;
-  width:100%;
-  height:100%;
-  position:fixed;
+#home {
+  background: url("../assets/background.jpeg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;

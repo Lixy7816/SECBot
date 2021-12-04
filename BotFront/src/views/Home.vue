@@ -76,13 +76,14 @@
       </el-footer>
     </el-container>
 
-    <el-drawer 
-    title="title"
-    :visible.sync="DrawVisible"
-    :with-header="false"
-    :modal="false"
-    size = '100%'
-    style="overflow:hidden;">
+    <el-drawer
+      title="title"
+      :visible.sync="DrawVisible"
+      :with-header="false"
+      :modal="false"
+      size="100%"
+      style="overflow:hidden;"
+    >
       <ChatRoom v-on:back="DrawVisible = false"/>
     </el-drawer>
   </div>
@@ -91,6 +92,7 @@
 <script>
 // registerUser, changePW, logOut
 import { postUser } from "@/utils/communications";
+import { ustore } from '@/store/UserStateStore';
 import Signup from "@/components/Signup";
 import Login from "@/components/Login";
 import ConfirmLogout from "@/components/ConfirmLogout";
@@ -120,8 +122,15 @@ export default {
       loadingVisible: false,
       userConnectVisible: false,
       dialogVisible_logout: false,
-      ustate: {
-        online: false
+      ustate: ustore.state,
+      botnames: {
+        type: Array,
+        default: () => [
+          "SECBot-小闲",
+          "SECBot-小诗",
+          "SECBot-小问",
+          "SECBot-小影"
+        ]
       }
     };
   },
@@ -172,7 +181,8 @@ export default {
     // 进入聊天
     choseABot: function choseABot(index) {
       this.DrawVisible = true;
-      console.log("HOME CHOSEBOT", index,this.DrawVisible);
+      console.log("HOME CHOSEBOT", index, this.DrawVisible);
+      ustore.set_bot(this.botnames[index-1]);
     },
     login: function login(username, password) {
       this.userConnectVisible = true;
