@@ -55,6 +55,8 @@ module.exports = {
     'no-alert': ["off"],
     'max-len': ["off"],
     'arrow-parens': ["off"],
-    'camelcase':["off"]
+    'camelcase':["off"],
+    'no-var':["off"],
+    'no-mutable-exports':["off"]
   }
 }

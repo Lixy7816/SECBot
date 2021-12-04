@@ -20,22 +20,22 @@
 </template>
 
 <script>
-import Avatar from "vue-avatar";
-import ChatList from "@/components/ChatList";
+import Avatar from 'vue-avatar';
+import ChatList from '@/components/ChatList';
 import { ustore } from '@/store/UserStateStore';
-import { sendMessage } from "@/utils/communications";
+import { sendMessage } from '@/utils/communications';
 
 export default {
-  name: "ChatRoom",
+  name: 'ChatRoom',
   data() {
     return {
       ustate: ustore.state
-    }
+    };
   },
   props: {
     username: {
       type: String,
-      default: () => "Lixy"
+      default: () => 'Lixy'
     },
     chatlist: {
       type: Array,
@@ -73,17 +73,17 @@ export default {
   },
   methods: {
     send: function send() {
-      console.log("ustore:",this.state)
-      let text = document.querySelector("#textarea").value;
+      console.log('ustore:', this.state);
+      let text = document.querySelector('#textarea').value;
       if (!text) {
-        alert("请输入内容");
+        alert('请输入内容');
         return;
       }
 
       // 发送消息
       let json = {};
       json.text = text;
-      json.username = "李浩";
+      json.username = '李浩';
       json.pos = 0;
       json.pk = this.chatlist.length;
       this.chatlist.push(json);
@@ -92,32 +92,32 @@ export default {
       sendMessage(text).then(
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
-            console.log("Get Response", Response.data.text);
+            console.log('Get Response', Response.data.text);
             let rjson = {};
             rjson.text = Response.data.text;
-            rjson.username = "小诗";
+            rjson.username = '小诗';
             rjson.pos = 1;
             rjson.pk = this.chatlist.length;
             this.chatlist.push(rjson);
-            console.log("chatlist:", this.chatlist);
+            console.log('chatlist:', this.chatlist);
           } else {
-            console.log("Error Response");
+            console.log('Error Response');
           }
         },
         error => {
-          console.log("No Response Error!", error);
+          console.log('No Response Error!', error);
         }
       );
 
-      document.querySelector("#textarea").value = "";
-      document.querySelector("#textarea").focus();
+      document.querySelector('#textarea').value = '';
+      document.querySelector('#textarea').focus();
       // TODO: 滚动条还有问题
-      let height = document.querySelector(".content").scrollHeight;
-      document.querySelector(".content").scrollTop = height * 10;
+      let height = document.querySelector('.content').scrollHeight;
+      document.querySelector('.content').scrollTop = height * 10;
       console.log(height);
     },
     goBack: function goBack() {
-      this.$emit("back");
+      this.$emit('back');
     }
   },
   created() {

@@ -91,21 +91,21 @@
 
 <script>
 // registerUser, changePW, logOut
-import { postUser } from "@/utils/communications";
+import { postUser } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
-import Signup from "@/components/Signup";
-import Login from "@/components/Login";
-import ConfirmLogout from "@/components/ConfirmLogout";
-import ChangePw from "@/components/ChangePassword";
-import ChooseBot from "@/components/ChooseBot";
-import ChatRoom from "@/components/ChatRoom";
+import Signup from '@/components/Signup';
+import Login from '@/components/Login';
+import ConfirmLogout from '@/components/ConfirmLogout';
+import ChangePw from '@/components/ChangePassword';
+import ChooseBot from '@/components/ChooseBot';
+import ChatRoom from '@/components/ChatRoom';
 
 let MES_INFO = 0;
 let MES_ERROR = 1;
 let MES_SUCC = 2;
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Signup,
     Login,
@@ -116,7 +116,7 @@ export default {
   },
   data() {
     return {
-      query: "",
+      query: '',
       DialogVisible: 1,
       DrawVisible: false,
       loadingVisible: false,
@@ -144,24 +144,24 @@ export default {
       this.timer = setTimeout(() => {
         if (message_type === MES_ERROR) {
           this.$notify.error({
-            position: "top-left",
+            position: 'top-left',
             offset: 100,
             duration: 1000,
-            title: "错误提示",
+            title: '错误提示',
             message: _message
           });
         } else if (message_type === MES_INFO) {
           this.$notify.info({
-            position: "top-left",
-            title: "提示",
+            position: 'top-left',
+            title: '提示',
             offset: 100,
             duration: 1000,
             message: _message
           });
         } else if (message_type === MES_SUCC) {
           this.$notify.success({
-            position: "top-left",
-            title: "提示",
+            position: 'top-left',
+            title: '提示',
             offset: 100,
             duration: 1000,
             message: _message
@@ -172,9 +172,9 @@ export default {
     // 进入聊天
     choseABot: function choseABot(index) {
       this.DrawVisible = true;
-      console.log("HOME CHOSEBOT", index, this.DrawVisible);
+      console.log('HOME CHOSEBOT', index, this.DrawVisible);
       ustore.set_bot(index);
-      console.log("Home ustore:",ustore.state);
+      console.log('Home ustore:', ustore.state);
     },
     login: function login(username, password) {
       this.userConnectVisible = true;
@@ -184,10 +184,10 @@ export default {
             // 登录成功
             this.userConnectVisible = false;
             // TODO: 修改本地保存的用户数据
-            this.tips(0, MES_SUCC, "登录成功!");
+            this.tips(0, MES_SUCC, '登录成功!');
             this.DialogVisible = 0;
           } else {
-            this.user_tips(500, 500, MES_ERROR, "未知错误");
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
         error => {
@@ -195,8 +195,8 @@ export default {
         }
       );
       this.$router.push({
-        path: "/ChatRoom",
-        name: "ChatRoom"
+        path: '/ChatRoom',
+        name: 'ChatRoom'
       });
     }
   }

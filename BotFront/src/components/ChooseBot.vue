@@ -12,7 +12,6 @@
         </div>
       </el-card>
     </el-col>
-    
     <el-col :span="6">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
         <img src="../assets/poem.jpeg" class="image" alt=""/>
@@ -23,8 +22,6 @@
         </div>
       </el-card>
     </el-col>
-
-    
     <el-col :span="6">
       <el-card :body-style="{padding: '10px'}" shadow="hover">
         <img src="../assets/Q_A.jpeg" class="image" alt=""/>
@@ -36,7 +33,6 @@
       </el-card>
     </el-col>
   </el-row>
-
     <el-row :gutter="20">
     <el-col :span="6" :offset="6">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
@@ -48,7 +44,6 @@
         </div>
       </el-card>
     </el-col>
-    
     <el-col :span="6">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
         <img src="../assets/other.jpeg" class="image" alt=""/>
@@ -57,18 +52,17 @@
           </div>
       </el-card>
     </el-col>
-
   </el-row>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ChooseBot",
+  name: 'ChooseBot',
   methods: {
-    chooseABot(index){
-      console.log("chooseABot",index);
-      this.$emit('choseABot',index);
+    chooseABot(index) {
+      console.log('chooseABot', index);
+      this.$emit('choseABot', index);
     }
   }
 };
