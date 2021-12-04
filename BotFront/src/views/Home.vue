@@ -65,7 +65,7 @@
             class="logout"
             >退出登录</el-menu-item
           >
-          <el-menu-item index="5">用户名</el-menu-item>
+          <el-menu-item index="5">{{ustate.username}}</el-menu-item>
         </el-menu>
       </el-header>
       <el-main>

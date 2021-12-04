@@ -20,17 +20,7 @@ export default {
   props: {
     chatList: {
       type: Array,
-      default: () => [{
-        pk: 0,
-        username: '李浩',
-        text: '你好',
-        pos: 0
-      }, {
-        pk: 1,
-        username: '马冀',
-        text: '你好啊',
-        pos: 1
-      }]
+      default: () => []
     }
   }
 };

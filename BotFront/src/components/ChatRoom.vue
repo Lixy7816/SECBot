@@ -36,30 +36,13 @@ export default {
     chatlist: {
       type: Array,
       default: () => [
+        // 格式如下:
         // {
-        //   pk: 0,
-        //   username: "server",
-        //   text: "昨天 12:35",
-        //   pos: 2
-        // },
-        // {
-        //   pk: 1,
-        //   username: "server",
-        //   text: "你已添加了小诗，现在可以开始聊天了。",
-        //   pos: 2
-        // },
-        // {
-        //   pk: 2,
-        //   username: "Lixy",
-        //   text: "你好",
-        //   pos: 0
-        // },
-        // {
-        //   pk: 3,
-        //   username: "诗",
-        //   text: "你好啊",
-        //   pos: 1
-        // }
+        //  pk: 1, 消息序号
+        //  username: '马冀', 用户名
+        //  text: '你好啊', 消息内容
+        //  pos: 1 消息在左侧还是右侧
+        // } 
       ]
     }
   },

@@ -4,11 +4,11 @@ import random
 import requests
 from django.shortcuts import HttpResponse
 
-# client_id 为官网获取的AK， client_secret 为官网获取的SK
-client_id = "Z3azDuZsqFG888EubjoR1yOR"
-client_secret = "lFqdE8jVm6DgCCwjeTEFfehrt0g1322q"
+# 根据用户需求选择不同的AI进行回复
+client_ids = ["Z3azDuZsqFG888EubjoR1yOR","Z3azDuZsqFG888EubjoR1yOR","Z3azDuZsqFG888EubjoR1yOR","Z3azDuZsqFG888EubjoR1yOR"]
+client_secrets = ["lFqdE8jVm6DgCCwjeTEFfehrt0g1322q","lFqdE8jVm6DgCCwjeTEFfehrt0g1322q","lFqdE8jVm6DgCCwjeTEFfehrt0g1322q","lFqdE8jVm6DgCCwjeTEFfehrt0g1322q"]
 
-def unit_chat(chat_input, user_id="88888"):
+def unit_chat(chat_input, client_id, client_secret, user_id="88888",):
     """
     description:调用百度UNIT接口，回复聊天内容
     Parameters
@@ -74,8 +74,9 @@ def chat(request):
     json_result = json.loads(request.body)
     print(json_result)
     text = json_result.get('text')
+    botindex = json_result.get('botindex')
     print("text:",text)
-    chat_reply = unit_chat(text)
+    chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex])
     reply = HttpResponse(json.dumps({
         'code': 200,
         'text': chat_reply
