@@ -1,5 +1,7 @@
 <template>
   <div id="home">
+    <el-page-header @back="goBack" content="详情页面">
+    </el-page-header>
     <div class="container">
       <div class="cheader">
         <header align="center">

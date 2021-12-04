@@ -89,16 +89,18 @@ div {
   border-bottom: 10px solid transparent;
   left: -20px;
 }
+
+/* 微信色调： 9eea6a*/
 .item-right .bubble {
   margin-right: 15px;
-  background-color: #9eea6a;
+  background-color: #87CEEB;
 }
 .item-right .bubble:before {
   content: "";
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 10px solid #9eea6a;
+  border-left: 10px solid #87CEEB;
   border-top: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid transparent;

@@ -81,9 +81,9 @@
     :visible.sync="DrawVisible"
     :with-header="false"
     :modal="false"
-    size = '50%'
+    size = '95%'
     style="overflow:hidden;">
-      <span>我来啦!</span>
+      <ChatRoom />
     </el-drawer>
   </div>
 </template>
@@ -109,7 +109,8 @@ export default {
     Login,
     ChangePw,
     ConfirmLogout,
-    ChooseBot
+    ChooseBot,
+    ChatRoom
   },
   data() {
     return {
