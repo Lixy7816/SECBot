@@ -16,7 +16,7 @@ export var ustore = {
     this.state.username = newValue;
   },
   set_bot(newValue) {
-    this.state.botindex = newValue-1;
+    this.state.botindex = newValue - 1;
     this.state.botname = botnames[newValue - 1];
   },
   set_online(newValue) {

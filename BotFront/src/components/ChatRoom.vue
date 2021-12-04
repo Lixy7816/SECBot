@@ -42,7 +42,7 @@ export default {
         //  username: '马冀', 用户名
         //  text: '你好啊', 消息内容
         //  pos: 1 消息在左侧还是右侧
-        // } 
+        // }
       ]
     }
   },
@@ -68,7 +68,7 @@ export default {
 
       // console.log('ChatRoom ustore:', this.ustate);
       // 消息传递给后端
-      sendMessage(text,this.ustate.botindex).then(
+      sendMessage(text, this.ustate.botindex).then(
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
             // console.log('Get Response', Response.data.text);
@@ -80,11 +80,11 @@ export default {
             this.chatlist.push(rjson);
             // console.log('chatlist:', this.chatlist);
           } else {
-            // console.log('Error Response');
+            console.log('Error Response');
           }
         },
         error => {
-          // console.log('No Response Error!', error);
+          console.log('No Response Error!', error);
         }
       );
 
