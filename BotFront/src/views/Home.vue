@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <Signup v-bind:dialogVisible= "DialogVisible == 1" v-bind:loadingVisible= "userConnectVisible" v-on:cancel= "DialogVisible = 0" v-on:confirm="toLogin" ref="sighup_dialog"/>
+    <Login v-bind:dialogVisible= "DialogVisible == 2" v-bind:loadingVisible= "userConnectVisible" v-on:signup= "DialogVisible = 1" v-on:cancel="DialogVisible = 0"  v-on:confirm="login" ref="login_dialog"/>
       <el-container>
         <el-header>
           <el-menu class="el-menu-demo" mode="horizontal" text-color="#000"  active-text-color="#6495ED" background-color="#ffffff">
@@ -24,11 +25,13 @@
 <script>
 // import {postUser, registerUser, changePW, logOut} from '@/utils/communication'
 import Signup from '@/components/Signup';
+import Login from '@/components/Login';
 
 export default {
   name: 'Home',
   components: {
-    Signup
+    Signup,
+    Login
   },
   data() {
     return {
