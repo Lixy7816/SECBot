@@ -15,7 +15,7 @@
           </el-menu>
         </el-header>
         <el-main>
-          <img src="../assets/logo.png">
+          <ChooseBot />
         </el-main>
         <el-footer v-if="loadingVisible">
           加载中...
@@ -31,6 +31,7 @@ import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
 import ChangePw from '@/components/ChangePassword';
+import ChooseBot from '@/components/ChooseBot';
 
 let MES_INFO = 0;
 let MES_ERROR = 1;
@@ -42,7 +43,8 @@ export default {
     Signup,
     Login,
     ChangePw,
-    ConfirmLogout
+    ConfirmLogout,
+    ChooseBot
   },
   data() {
     return {
@@ -105,10 +107,6 @@ export default {
             // TODO: 修改本地保存的用户数据
             this.tips(0, MES_SUCC, '登录成功!');
             this.DialogVisible = 0;
-            this.$router.push({
-              path: '/ChatRoom',
-              name: 'ChatRoom'
-            });
           } else {
             this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
@@ -117,6 +115,10 @@ export default {
           this.error_handle(error);
         }
       );
+      this.$router.push({
+        path: '/ChatRoom',
+        name: 'ChatRoom'
+      });
     }
   }
 };
