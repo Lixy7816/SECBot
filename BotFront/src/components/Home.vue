@@ -1,18 +1,20 @@
 <template>
-  <div class="container">
-    <div class="cheader">
-      <header align="center">
-        SECBot-{{botname}}
-      </header>
-      <hr />
-    </div>
-    <div class="content">
-      <ChatList v-bind:chatList="chatlist" />
-    </div>
-    <div class="input-area">
-      <textarea name="text" id="textarea"></textarea>
-      <div class="button-area">
-        <button id="send" v-on:click="send">发 送</button>
+  <div id="home">
+    <div class="container">
+      <div class="cheader">
+        <header align="center">
+          SECBot-{{botname}}
+        </header>
+        <hr />
+      </div>
+      <div class="content">
+        <ChatList v-bind:chatList="chatlist" />
+      </div>
+      <div class="input-area">
+        <textarea name="text" id="textarea"></textarea>
+        <div class="button-area">
+          <button id="send" v-on:click="send">发 送</button>
+        </div>
       </div>
     </div>
   </div>
@@ -140,13 +142,6 @@ a {
 * {
   padding: 0;
   margin: 0;
-}
-body {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .container {
   margin: 0 auto;
@@ -290,5 +285,15 @@ textarea {
   border-radius: 10px;
   background: rgba(0, 0, 0, 0);
   box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+#home{
+  background:url("../assets/background.jpeg");
+  background-size:100% 100%;
+  width:100%;
+  height:100%;
+  position:fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
