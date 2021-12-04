@@ -26,11 +26,15 @@
 
 <script>
 // registerUser, changePW, logOut
-import {postUser} from '@/utils/communications';
+import { postUser } from '@/utils/communications';
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
 import ChangePw from '@/components/ChangePassword';
+
+let MES_INFO = 0;
+let MES_ERROR = 1;
+let MES_SUCC = 2;
 
 export default {
   name: 'Home',
@@ -60,6 +64,36 @@ export default {
     },
     // 2.提示信息
     user_tips: function user_tips(wait_time, wait_time2, message_type, _message) {
+      this.timer = setTimeout(() => {
+        this.userConnectVisible = false;
+      }, wait_time);
+      this.timer = setTimeout(() => {
+        if (message_type === MES_ERROR) {
+          this.$notify.error({
+            position: 'top-left',
+            offset: 100,
+            duration: 1000,
+            title: '错误提示',
+            message: _message
+          });
+        } else if (message_type === MES_INFO) {
+          this.$notify.info({
+            position: 'top-left',
+            title: '提示',
+            offset: 100,
+            duration: 1000,
+            message: _message
+          });
+        } else if (message_type === MES_SUCC) {
+          this.$notify.success({
+            position: 'top-left',
+            title: '提示',
+            offset: 100,
+            duration: 1000,
+            message: _message
+          });
+        }
+      }, wait_time2);
     },
     login: function login(username, password) {
       this.userConnectVisible = true;
@@ -72,9 +106,9 @@ export default {
             this.tips(0, MES_SUCC, '登录成功!');
             this.DialogVisible = 0;
             this.$router.push({
-                path: '/ChatRoom',
-                name: 'ChatRoom'
-              });
+              path: '/ChatRoom',
+              name: 'ChatRoom'
+            });
           } else {
             this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
@@ -82,7 +116,7 @@ export default {
         error => {
           this.error_handle(error);
         }
-      )
+      );
     }
   }
 };

@@ -54,6 +54,7 @@ module.exports = {
     'no-console': ['off'],
     'no-alert': ["off"],
     'max-len': ["off"],
-    'arrow-parens': ["off"]
+    'arrow-parens': ["off"],
+    'camelcase':["off"]
   }
 }
