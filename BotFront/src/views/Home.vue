@@ -2,6 +2,7 @@
   <div id="home">
     <Signup v-bind:dialogVisible= "DialogVisible == 1" v-bind:loadingVisible= "userConnectVisible" v-on:cancel= "DialogVisible = 0" v-on:confirm="toLogin" ref="sighup_dialog"/>
     <Login v-bind:dialogVisible= "DialogVisible == 2" v-bind:loadingVisible= "userConnectVisible" v-on:signup= "DialogVisible = 1" v-on:cancel="DialogVisible = 0"  v-on:confirm="login" ref="login_dialog"/>
+    <ChangePw v-bind:dialogVisible = "DialogVisible == 3" v-bind:loadingVisible = "userConnectVisible" v-on:cancel= "DialogVisible = 0" v-on:confirm="changepassword" ref="changepw_dialog"/>
     <ConfirmLogout v-bind:dialogVisible = "DialogVisible == 4" v-on:cancel= "DialogVisible = 0" v-on:confirm="logout" ref="confirmLogout_dialog"/>
       <el-container>
         <el-header>
@@ -28,13 +29,15 @@
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
+import ChangePw from '@/components/ChangePassword';
 
 export default {
   name: 'Home',
   components: {
     Signup,
     Login,
-    ConfirmLogout 
+    ChangePw,
+    ConfirmLogout
   },
   data() {
     return {
