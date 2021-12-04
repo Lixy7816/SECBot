@@ -1,14 +1,11 @@
 <template>
   <div id="home">
-    <el-page-header @back="goBack" content="详情页面">
-    </el-page-header>
     <div class="container">
       <div class="cheader">
-        <header align="center">
-          SECBot-{{botname}}
-        </header>
-        <hr />
+      <el-page-header @back="goBack" v-bind:content="botname">
+      </el-page-header>
       </div>
+      <el-divider />
       <div class="content">
         <ChatList v-bind:chatList="chatlist" />
       </div>
@@ -32,7 +29,7 @@ export default {
   data() {
     return {
       username: '李浩',
-      botname: '小诗',
+      botname: 'SECBot-小诗',
       chatlist: [
         {
           pk: 0,
@@ -109,6 +106,9 @@ export default {
       let height = document.querySelector('.content').scrollHeight;
       document.querySelector('.content').scrollTop = height * 10;
       console.log(height);
+    },
+    goBack: function goBack(){
+      this.$emit('back');
     }
   },
   created() {

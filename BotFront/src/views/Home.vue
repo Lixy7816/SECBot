@@ -81,9 +81,9 @@
     :visible.sync="DrawVisible"
     :with-header="false"
     :modal="false"
-    size = '95%'
+    size = '100%'
     style="overflow:hidden;">
-      <ChatRoom />
+      <ChatRoom v-on:back="DrawVisible = false"/>
     </el-drawer>
   </div>
 </template>
