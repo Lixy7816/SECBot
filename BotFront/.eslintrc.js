@@ -53,6 +53,7 @@ module.exports = {
     'no-unused-vars':['warn'],
     'no-console': ['off'],
     'no-alert': ["off"],
-    'max-len': ["off"]
+    'max-len': ["off"],
+    'arrow-parens': ["off"]
   }
 }

@@ -25,7 +25,8 @@
 </template>
 
 <script>
-// import {postUser, registerUser, changePW, logOut} from '@/utils/communication'
+// registerUser, changePW, logOut
+import {postUser} from '@/utils/communications';
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
@@ -52,7 +53,37 @@ export default {
     };
   },
   methods: {
-
+    // 1.错误处理代码
+    error_handle: function error_handle(error) {
+      // TODO: 补全错误处理
+      console.log(error);
+    },
+    // 2.提示信息
+    user_tips: function user_tips(wait_time, wait_time2, message_type, _message) {
+    },
+    login: function login(username, password) {
+      this.userConnectVisible = true;
+      postUser(username, password).then(
+        Response => {
+          if (Response.status === 200 && Response.data.code === 200) {
+            // 登录成功
+            this.userConnectVisible = false;
+            // TODO: 修改本地保存的用户数据
+            this.tips(0, MES_SUCC, '登录成功!');
+            this.DialogVisible = 0;
+            this.$router.push({
+                path: '/ChatRoom',
+                name: 'ChatRoom'
+              });
+          } else {
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
+          }
+        },
+        error => {
+          this.error_handle(error);
+        }
+      )
+    }
   }
 };
 </script>
