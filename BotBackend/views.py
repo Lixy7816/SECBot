@@ -5,10 +5,11 @@ import requests
 from django.shortcuts import HttpResponse
 
 # 根据用户需求选择不同的AI进行回复
+# AI依次是:闲聊,诗词,问答,影视
 client_ids = ["Z3azDuZsqFG888EubjoR1yOR","Z3azDuZsqFG888EubjoR1yOR","Z3azDuZsqFG888EubjoR1yOR","Z3azDuZsqFG888EubjoR1yOR"]
 client_secrets = ["lFqdE8jVm6DgCCwjeTEFfehrt0g1322q","lFqdE8jVm6DgCCwjeTEFfehrt0g1322q","lFqdE8jVm6DgCCwjeTEFfehrt0g1322q","lFqdE8jVm6DgCCwjeTEFfehrt0g1322q"]
-
-def unit_chat(chat_input, client_id, client_secret, user_id="88888",):
+service_ids = ["S62219","S62529","S62531","S62530"]
+def unit_chat(chat_input, client_id, client_secret, service_id, user_id="88888"):
     """
     description:调用百度UNIT接口，回复聊天内容
     Parameters
@@ -38,7 +39,7 @@ def unit_chat(chat_input, client_id, client_secret, user_id="88888",):
                     "user_id": user_id
                 },
                 "session_id": "",
-                "service_id": "S62219",
+                "service_id": service_id,
                 "version": "2.0"
             }
     # 将封装好的数据作为请求内容, 发送给Unit聊天机器人接口, 并得到返回结果
@@ -76,7 +77,7 @@ def chat(request):
     text = json_result.get('text')
     botindex = json_result.get('botindex')
     print("text:",text)
-    chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex])
+    chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex],service_ids[botindex])
     reply = HttpResponse(json.dumps({
         'code': 200,
         'text': chat_reply
