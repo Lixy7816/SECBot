@@ -27,3 +27,39 @@ class SignUpTests(TestCase):
         result = json.loads(response.content)
         code = result['code']
         assert code == 200
+
+class SignInTests(TestCase):
+    '''query test'''
+    def test_sign_in(self):
+        '''query test'''
+        c = Client()
+        rf1 = RequestFactory()
+        data = {
+            'username':'unittest',
+            'password':'123456'
+        }
+        response = c.post(TEST_SIGN_UP_URL, data, content_type='application/json')
+        response = c.post(TEST_SIGN_IN_URL, data, content_type='application/json')
+        print(c.cookies.items())
+        result = json.loads(response.content)
+        code = result['code']
+        assert code == 200
+
+class SignOutTests(TestCase):
+    '''query test'''
+    def test_sign_out(self):
+        '''query test'''
+        rf1 = RequestFactory()
+        data = {
+            'username':'unittest',
+            'password':'123456'
+        }
+        rf1.post(TEST_SIGN_UP_URL, data, content_type='application/json')
+        rf2 = RequestFactory()
+        request2 = rf2.post(TEST_SIGN_IN_URL, data, content_type='application/json')
+        rf3 = RequestFactory()
+        request3 = rf3.post(TEST_SIGN_IN_URL)
+        response = sign_out(request3)
+        result = json.loads(response.content)
+        code = result['code']
+        assert code == 200
