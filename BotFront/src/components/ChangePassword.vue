@@ -69,7 +69,7 @@ export default {
     cancel: function cancel() {
       this.$emit('cancel');
     },
-    confirm: function cancel(formName) {
+    confirm: function confirm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$emit('confirm', this.ruleForm.old_password, this.ruleForm.password);
