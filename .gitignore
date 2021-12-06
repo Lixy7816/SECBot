@@ -106,4 +106,6 @@ GitHub.sublime-settings
 
 # use vscode
 .vscode/
- 
+
+# model data
+data/
