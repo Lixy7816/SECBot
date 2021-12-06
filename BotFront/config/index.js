@@ -15,10 +15,6 @@ module.exports = {
         target: 'http://localhost:8000',
         changOrigin: true
       },
-      '/docmanager': { // 代理标识
-        target: 'http://localhost:8000',
-        changeOrigin: true // 允许跨域
-      },
       '/usermanager': { // 代理标识
         target: 'http://localhost:8000',
         changeOrigin: true // 允许跨域
