@@ -2,7 +2,7 @@
   <div id="home">
     <div class="container">
       <div class="cheader">
-        <el-page-header @back="goBack"  v-bind:content="ustate.botname">
+        <el-page-header @back="goBack"  v-bind:content="ustate.botname" class="backhome">
         </el-page-header>
       </div>
       <el-divider />
@@ -10,9 +10,9 @@
         <ChatList v-bind:chatList="chatlist" />
       </div>
       <div class="input-area">
-        <textarea name="text" id="textarea"></textarea>
+        <textarea name="text" class="txtarea" id="textarea"></textarea>
         <div class="button-area">
-          <button id="send" v-on:click="send">发 送</button>
+          <button class="send" v-on:click="send">发 送</button>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     send: function send() {
-      let text = document.querySelector('#textarea').value;
+      let text = document.getElementById('textarea').value;
       if (!text) {
         alert('请输入内容');
         return;
@@ -91,8 +91,8 @@ export default {
       document.querySelector('#textarea').value = '';
       document.querySelector('#textarea').focus();
       // TODO: 滚动条还有问题
-      let height = document.querySelector('.content').scrollHeight;
-      document.querySelector('.content').scrollTop = height * 10;
+      // let height = document.querySelector('.content').scrollHeight;
+      // document.querySelector('.content').scrollTop = height * 10;
       // console.log(height);
     },
     goBack: function goBack() {
