@@ -53,3 +53,42 @@ def gen_token(username):
 def renew_token(token_string):
     '''renew_token'''
     Token.objects.filter(token=token_string)
+
+def gen_user_info(username):
+    '''generate response'''
+    user = User.objects.filter(username=username).first()
+    return {'id': user.id,
+            'username': user.username,
+            'password': user.password,
+            'is_manager': user.is_manager}
+
+
+def gen_response(code, data, username=None):
+    '''generate response'''
+    res = HttpResponse(json.dumps({
+        'code': code,
+        'data': data
+    }, cls=DateEncoder), content_type="application/json", status=code)
+
+    if username:
+        token_string = gen_token(username)
+        res.set_cookie("token", token_string)
+    return res
+
+
+def get_user_info_from_token(token_string):
+    '''get_user_info_from_token'''
+    token = Token.objects.filter(token=token_string).first()
+    if not token:
+        return "", False
+    expire_time = token.expires_at
+    if expire_time < UTC.localize(datetime.now()):
+        return "", False
+    return token.username, token.is_manager
+
+
+def get_username_from_token(token_string):
+    '''get_username_from_token'''
+    username, _ = get_user_info_from_token(token_string)
+    return username
+
