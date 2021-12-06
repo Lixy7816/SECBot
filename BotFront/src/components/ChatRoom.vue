@@ -24,7 +24,6 @@ import Avatar from 'vue-avatar';
 import ChatList from '@/components/ChatList';
 import { ustore } from '@/store/UserStateStore';
 import { sendMessage } from '@/utils/communications';
-
 export default {
   name: 'ChatRoom',
   data() {
@@ -51,6 +50,10 @@ export default {
     ChatList
   },
   methods: {
+    getHistory: function getHistory(history){
+      console.log("Chatroom",history)
+      this.chatlist = history
+    },
     send: function send() {
       let text = document.getElementById('textarea').value;
       if (!text) {

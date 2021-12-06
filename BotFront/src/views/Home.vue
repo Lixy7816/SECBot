@@ -84,7 +84,7 @@
       size="100%"
       style="overflow:hidden;"
     >
-      <ChatRoom v-on:back="DrawVisible = false"/>
+      <ChatRoom ref="ctroom" v-on:back="DrawVisible = false"/>
     </el-drawer>
   </div>
 </template>
@@ -99,6 +99,7 @@ import ConfirmLogout from '@/components/ConfirmLogout';
 import ChangePw from '@/components/ChangePassword';
 import ChooseBot from '@/components/ChooseBot';
 import ChatRoom from '@/components/ChatRoom';
+import { defaultmessages } from '@/store/HistoryStore';
 
 let MES_INFO = 0;
 let MES_ERROR = 1;
@@ -172,9 +173,16 @@ export default {
     // 进入聊天
     choseABot: function choseABot(index) {
       this.DrawVisible = true;
-      console.log('HOME CHOSEBOT', index, this.DrawVisible);
       ustore.set_bot(index);
-      console.log('Home ustore:', ustore.state);
+      let history = [];
+      history.push({
+        pk: 0,
+        username: ustore.state.botname.slice(8),
+        text: defaultmessages[index-1].text,
+        pos: 1
+      });
+      console.log("Home history:",history)
+      this.$refs.ctroom.getHistory(history);
     },
     login: function login(username, password) {
       this.userConnectVisible = true;
