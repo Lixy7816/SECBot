@@ -57,6 +57,8 @@ module.exports = {
     'arrow-parens': ["off"],
     'camelcase':["off"],
     'no-var':["off"],
-    'import/no-mutable-exports':["off"]
+    'import/no-mutable-exports':["off"],
+    'no-useless-return':['off'],
+    'no-else-return':['off']
   }
 }
