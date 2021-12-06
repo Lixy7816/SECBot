@@ -27,6 +27,6 @@ module.exports = {
     '!src/mock/*',
     '!src/main.js',
     '!src/router/index.js',
-    '!**/node_modules/**'
+    '!**/node_modules/**',
   ]
 }
