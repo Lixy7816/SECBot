@@ -93,13 +93,13 @@
 // registerUser, changePW, logOut
 import { postUser } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
+import { defaultmessages } from '@/store/HistoryStore';
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
 import ChangePw from '@/components/ChangePassword';
 import ChooseBot from '@/components/ChooseBot';
 import ChatRoom from '@/components/ChatRoom';
-import { defaultmessages } from '@/store/HistoryStore';
 
 let MES_INFO = 0;
 let MES_ERROR = 1;
@@ -178,10 +178,10 @@ export default {
       history.push({
         pk: 0,
         username: ustore.state.botname.slice(8),
-        text: defaultmessages[index-1].text,
+        text: defaultmessages[index - 1].text,
         pos: 1
       });
-      console.log("Home history:",history)
+      console.log('Home history:', history);
       this.$refs.ctroom.getHistory(history);
     },
     login: function login(username, password) {
