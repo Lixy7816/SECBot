@@ -3,6 +3,7 @@ import json
 import random
 import requests
 from django.shortcuts import HttpResponse
+from DLmodel.DLBot import botReply
 
 # 根据用户需求选择不同的AI进行回复
 # AI依次是:闲聊,诗词,问答,影视
@@ -75,9 +76,12 @@ def chat(request):
     json_result = json.loads(request.body)
     print(json_result)
     text = json_result.get('text')
-    botindex = json_result.get('botindex')
     print("text:",text)
-    chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex],service_ids[botindex])
+
+    chat_reply = botReply(text)
+
+    # botindex = json_result.get('botindex')
+    # chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex],service_ids[botindex])
     reply = HttpResponse(json.dumps({
         'code': 200,
         'text': chat_reply
