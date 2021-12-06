@@ -24,7 +24,7 @@ def unit_chat(chat_input, client_id, client_secret, service_id, user_id="88888")
       返回unit回复内容
     """
     # 设置默认回复内容,  一旦接口出现异常, 回复该内容
-    chat_reply = "不好意思，俺们正在学习中，随后回复你。"
+    chat_reply = "不好意思，我们正在学习，稍后再回复您。"
     # 根据 client_id 与 client_secret 获取access_token
     url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=%s&client_secret=%s" % (
     client_id, client_secret)
@@ -57,9 +57,10 @@ def unit_chat(chat_input, client_id, client_secret, service_id, user_id="88888")
     unit_chat_obj_result = unit_chat_obj["result"]
     unit_chat_response_list = unit_chat_obj_result["response_list"]
     # 随机选取一个"意图置信度"[+response_list[].schema.intent_confidence]不为0的技能作为回答
-    unit_chat_response_obj = random.choice(
-       [unit_chat_response for unit_chat_response in unit_chat_response_list if
-        unit_chat_response["schema"]["intent_confidence"] > 0.0])
+    goodans = [unit_chat_response for unit_chat_response in unit_chat_response_list if unit_chat_response["schema"]["intent_confidence"] > 0.0]
+    if(goodans == []):
+        return chat_reply
+    unit_chat_response_obj = random.choice(goodans)
     unit_chat_response_action_list = unit_chat_response_obj["action_list"]
     unit_chat_response_action_obj = random.choice(unit_chat_response_action_list)
     unit_chat_response_say = unit_chat_response_action_obj["say"]
@@ -76,12 +77,16 @@ def chat(request):
     json_result = json.loads(request.body)
     print(json_result)
     text = json_result.get('text')
-    print("text:",text)
 
-    chat_reply = botReply(text)
-
-    # botindex = json_result.get('botindex')
-    # chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex],service_ids[botindex])
+    botindex = json_result.get('botindex')
+    if botindex < 4:
+        chat_reply = unit_chat(text,client_ids[botindex],client_secrets[botindex],service_ids[botindex])
+    else:
+        chat_reply = botReply(text)
+    
+    # 如果接受到的内容为空，则给出相应的回复
+    if chat_reply == ' ' or chat_reply == '':
+      chat_reply = '不好意思，我们正在学习，稍后再回复您。'
     reply = HttpResponse(json.dumps({
         'code': 200,
         'text': chat_reply
