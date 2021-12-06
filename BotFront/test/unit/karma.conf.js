@@ -13,8 +13,11 @@ module.exports = function karmaConfig(config) {
     // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
+    // 测试报告
     reporters: ['spec', 'coverage'],
+    // 测试入口文件
     files: ['./index.js'],
+    // 预处理器 karma-webpack
     preprocessors: {
       './index.js': ['webpack', 'sourcemap'],
     },
@@ -22,6 +25,7 @@ module.exports = function karmaConfig(config) {
     webpackMiddleware: {
       noInfo: true,
     },
+    // 测试覆盖率报告
     coverageReporter: {
       dir: './coverage',
       reporters: [
