@@ -1,6 +1,7 @@
+'''app config'''
 from django.apps import AppConfig
 
 
 class UsermanagerConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+    '''usermanagerconfig'''
     name = 'usermanager'

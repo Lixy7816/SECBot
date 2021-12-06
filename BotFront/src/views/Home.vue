@@ -94,6 +94,7 @@
 import { postUser } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
 import { defaultmessages } from '@/store/HistoryStore';
+import { localStore } from '@/store/StorageLocal'
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
@@ -132,7 +133,37 @@ export default {
       // TODO: 补全错误处理
       console.log(error);
     },
-    // 2.提示信息
+    // 2.通用提示信息
+    tips: function (wait_time, message_type, _message) {
+      this.timer = setTimeout(() => {
+        if (message_type === MES_ERROR) {
+          this.$notify.error({
+            position: 'top-left',
+            offset: 100,
+            duration: 1000,
+            title: '错误提示',
+            message: _message
+          })
+        } else if (message_type === MES_INFO) {
+          this.$notify.info({
+            position: 'top-left',
+            title: '提示',
+            offset: 100,
+            duration: 1000,
+            message: _message
+          })
+        } else if (message_type === MES_SUCC) {
+          this.$notify.success({
+            position: 'top-left',
+            title: '提示',
+            offset: 100,
+            duration: 1000,
+            message: _message
+          })
+        }
+      }, wait_time)
+    },
+    // 3.用户提示信息
     user_tips: function user_tips(
       wait_time,
       wait_time2,
@@ -170,7 +201,7 @@ export default {
         }
       }, wait_time2);
     },
-    // 进入聊天
+    // 4.进入聊天
     choseABot: function choseABot(index) {
       this.DrawVisible = true;
       ustore.set_bot(index);
@@ -184,14 +215,50 @@ export default {
       console.log('Home history:', history);
       this.$refs.ctroom.getHistory(history);
     },
+    // 4.注册
+    toLogin: function (username, password) {
+      if (username.length > 20 || password.length > 20) {
+        this.tips(0, MES_INFO, '用户名和密码最长为20个字符,请检查!');
+        return;
+      }
+      // 注册并转到登录界面
+      this.userConnectVisible = true;
+      registerUser(username, password).then(
+        Response => {
+          if (Response.status === 200 && Response.data.code === 200) {
+            // 信息传入后端，如是已注册用户则登陆成功，如果不是，alert显示用户名不存在，如果用户名存在，密码不存在，alert显示密码错误
+            // 登录成功
+            this.userConnectVisible = false;
+            this.tips(0, MES_SUCC, '注册成功!');
+            // 转到登录界面
+            this.DialogVisible = 2;
+          } else {
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
+          }
+        },
+        error => {
+          this.error_handle(error, USER);
+        }
+      )
+    },
+    // 5.登录
     login: function login(username, password) {
       this.userConnectVisible = true;
       postUser(username, password).then(
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
+            console.log('login successfully!');
             // 登录成功
             this.userConnectVisible = false;
             // TODO: 修改本地保存的用户数据
+            var userinfo = {
+              username: username
+            }
+            // 设置登录状态
+            ustore.set_user(userinfo.username)
+            ustore.set_online(true)
+            localStore.save_json('userinfo', userinfo)
+
             this.tips(0, MES_SUCC, '登录成功!');
             this.DialogVisible = 0;
           } else {
@@ -202,10 +269,6 @@ export default {
           this.error_handle(error);
         }
       );
-      this.$router.push({
-        path: '/ChatRoom',
-        name: 'ChatRoom'
-      });
     }
   }
 };
