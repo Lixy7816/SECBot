@@ -32,3 +32,17 @@ class History(models.Model):
 
     class Meta:
         db_table = 'History'
+
+class Token(models.Model):
+    '''token'''
+    # The user
+    username = models.CharField('username', max_length=20)
+    # Is manager
+    is_manager = models.BooleanField("is manager", default=False)
+    # The token
+    token = models.CharField('token', max_length=32)
+    # The token expires at this time
+    expires_at = models.DateTimeField()
+
+    class Meta:
+        db_table = 'Token'
