@@ -6,7 +6,8 @@ describe('UserStateStore.js', () => {
         'SECBot-小闲',
         'SECBot-小诗',
         'SECBot-小问',
-        'SECBot-小影'
+        'SECBot-小影',
+        'SECBot-小黄鸡'
       ])
     }),
     it('ustore', () => {

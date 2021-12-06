@@ -34,7 +34,7 @@
     </el-col>
   </el-row>
     <el-row :gutter="20">
-    <el-col :span="6" :offset="6">
+    <el-col :span="6" :offset="3">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
         <img src="../assets/film.jpeg" class="image" alt=""/>
         <div class="undpic">
@@ -46,10 +46,22 @@
     </el-col>
     <el-col :span="6">
       <el-card :body-style="{ padding: '10px' }" shadow="hover">
+        <img src="../assets/xhj.png" class="image" alt=""/>
+        <div class="undpic">
+          <div class="bottom clearfix">
+            <el-button type="text" class="button" v-on:click="chooseABot(5)">闲聊-小黄鸡版</el-button>
+          </div>
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span="6">
+      <el-card :body-style="{ padding: '10px' }" shadow="hover">
         <img src="../assets/other.jpeg" class="image" alt=""/>
+        <div class="undpic">
           <div class="bottom clearfix">
             <el-button type="text" class="button">更多功能等待开发</el-button>
           </div>
+        </div>
       </el-card>
     </el-col>
   </el-row>

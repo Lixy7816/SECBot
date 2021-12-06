@@ -2,7 +2,8 @@ export const botnames = [
   'SECBot-小闲',
   'SECBot-小诗',
   'SECBot-小问',
-  'SECBot-小影'
+  'SECBot-小影',
+  'SECBot-小黄鸡'
 ];
 
 export var ustore = {
@@ -17,7 +18,7 @@ export var ustore = {
     return;
   },
   set_bot(newValue) {
-    if (newValue > 0 && newValue < 5) {
+    if (newValue > 0 && newValue < 6) {
       let index = newValue - 1;
       this.state.botindex = index;
       this.state.botname = botnames[index];
