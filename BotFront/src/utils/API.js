@@ -18,6 +18,10 @@ const API = {
   CHANGE_PW: {
     path: '/usermanager/modify_password',
     method: 'post'
+  },
+  VIEW_HISTORY: {
+    path: '/usermanager/view_history',
+    method: 'get'
   }
 };
 

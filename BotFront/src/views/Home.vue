@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { registerUser, postUser, changePW, logOut } from '@/utils/communications';
+import { registerUser, postUser, changePW, logOut, getHistory } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
 import { defaultmessages } from '@/store/HistoryStore';
 import { localStore, get_token } from '@/store/StorageLocal';
@@ -227,6 +227,18 @@ export default {
         this.tips(0, MES_INFO, '请先登录~');
         return;
       }
+      getHistory(ustore.state.username).then(
+        Response => {
+          if (Response.status === 200 && Response.data.code === 200) {
+            console.log('history:', Response.data);
+          } else {
+            this.tips(500, 500, MES_ERROR, '获取历史记录失败');
+          }
+        },
+        error => {
+          this.error_handle(error);
+        }
+      );
       this.DrawVisible = true;
       ustore.set_bot(index);
       let history = [];

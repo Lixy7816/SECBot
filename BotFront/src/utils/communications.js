@@ -39,3 +39,10 @@ export function changePW(_username, _password, _newPassword) {
     new_password: _newPassword
   });
 }
+
+// 获取历史记录
+export function getHistory(_username) {
+  return axios.post(API.VIEW_HISTORY.path, {
+    username: _username
+  });
+}

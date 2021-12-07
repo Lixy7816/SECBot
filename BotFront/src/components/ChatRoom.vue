@@ -75,9 +75,9 @@ export default {
       sendMessage(text, this.ustate.botindex).then(
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
-            // console.log('Get Response', Response.data.text);
+            console.log('Get Response', Response.data.data.text);
             let rjson = {};
-            rjson.text = Response.data.text;
+            rjson.text = Response.data.data.text;
             rjson.username = this.ustate.botname.slice(8);
             rjson.pos = 1;
             rjson.pk = this.chatlist.length;

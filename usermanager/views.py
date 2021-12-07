@@ -170,3 +170,19 @@ def modify_password(request):
         return gen_response(400, "密码错误,请检查您的输入")
     User.objects.filter(username=username, password=password).update(password=new_password)
     return gen_response(200, {}, user.username)
+
+@csrf_exempt
+def view_history(request):
+    '''view_history'''
+    token_string = request.COOKIES.get("token")
+    print(request.COOKIES)
+    username = get_username_from_token(token_string)
+    if not username:
+        return gen_response(401, SIGN_IN_ERROR_INFO)
+    history_set = History.objects.filter(username=username)
+    history_info_set = []
+    for history in history_set:
+        history_info = {'bot_id': history.bot_id, 'query': history.query, 'answer': history.answer,
+                        'timestamp': history.timestamp}
+        history_info_set.append(history_info)
+    return gen_response(200, history_info_set, username)
