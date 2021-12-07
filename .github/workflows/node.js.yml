@@ -21,9 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: change dir
-      run: cd BotFront && echo $(ls)
     - name: Use Node.js ${{ matrix.node-version }}
+      working-directory: ./BotFront
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
