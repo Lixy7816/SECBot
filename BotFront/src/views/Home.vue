@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       query: '',
-      DialogVisible: 1,
+      DialogVisible: 0,
       DrawVisible: false,
       loadingVisible: false,
       userConnectVisible: false,
@@ -223,6 +223,10 @@ export default {
     },
     // 4.进入聊天
     choseABot: function choseABot(index) {
+      if (!ustore.state.online) {
+        this.tips(0, MES_INFO, '请先登录~');
+        return;
+      }
       this.DrawVisible = true;
       ustore.set_bot(index);
       let history = [];
