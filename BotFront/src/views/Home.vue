@@ -93,7 +93,7 @@
 import { registerUser, postUser, changePW, logOut } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
 import { defaultmessages } from '@/store/HistoryStore';
-import { localStore } from '@/store/StorageLocal';
+import { localStore, get_token } from '@/store/StorageLocal';
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
@@ -271,7 +271,6 @@ export default {
             console.log('login successfully!');
             // 登录成功
             this.userConnectVisible = false;
-            // TODO: 修改本地保存的用户数据
             let userinfo = {
               username: username
             };
@@ -333,6 +332,24 @@ export default {
           this.error_handle(error);
         }
       );
+    }
+  },
+  created() {
+    // 初始化时从本地存储读取用户信息,若存在用户信息但cookie中的token已过期,则退出登录并删除数据
+    let userinfo = localStore.get_json('userinfo');
+    if (typeof (userinfo.username) !== 'undefined') {
+      ustore.set_user(userinfo.username);
+      ustore.set_online(true);
+      let uname = get_token(document.cookie);
+      if (uname === '') {
+        ustore.set_online(false);
+        ustore.set_user('请登录');
+        this.DialogVisible = 0;
+        localStore.remove_json('userinfo');
+        this.$alert('会话已过期,请重新登录', '提示', {
+          confirmButtonText: '确定'
+        });
+      }
     }
   }
 };

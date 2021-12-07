@@ -61,6 +61,7 @@ module.exports = {
     'no-useless-return':['off'],
     'no-else-return':['off'],
     'import/prefer-default-export':['off'],
-    'object-shorthand':['off']
+    'object-shorthand':['off'],
+    'prefer-template':['off']
   }
 }
