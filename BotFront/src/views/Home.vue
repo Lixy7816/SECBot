@@ -90,8 +90,7 @@
 </template>
 
 <script>
-// registerUser, changePW, logOut
-import { registerUser, postUser, changePW } from '@/utils/communications';
+import { registerUser, postUser, changePW, logOut } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
 import { defaultmessages } from '@/store/HistoryStore';
 import { localStore } from '@/store/StorageLocal';
@@ -311,6 +310,26 @@ export default {
         },
         error => {
           this.userConnectVisible = false;
+          this.error_handle(error);
+        }
+      );
+    },
+    // 7. 退出登录
+    logout: function logout() {
+      logOut().then(
+        Response => {
+          if (Response.status === 200 && Response.data.code === 200) {
+            // 退出成功
+            ustore.set_online(false);
+            ustore.set_user('请登录');
+            this.DialogVisible = 0;
+            localStore.remove_json('userinfo');
+            this.tips(100, MES_INFO, '已退出登录');
+          } else {
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
+          }
+        },
+        error => {
           this.error_handle(error);
         }
       );
