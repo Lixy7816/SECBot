@@ -1,4 +1,4 @@
-#this is a test deployment template
+#this is a test deployment template for the  Multi-person collaborative development
 name: Test
 
  on: [push, pull_request]
