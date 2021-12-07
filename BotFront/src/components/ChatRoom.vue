@@ -53,6 +53,7 @@ export default {
   methods: {
     getHistory: function getHistory(history) {
       console.log('Chatroom', history);
+      // 直接指向,统一修改
       this.chatlist = history;
     },
     send: function send() {
