@@ -52,14 +52,14 @@
             >登录</el-menu-item
           >
           <el-menu-item
-            v-if="!ustate.online"
+            v-if="ustate.online"
             index="3"
             v-on:click="DialogVisible = 3"
             class="changePw"
             >修改密码</el-menu-item
           >
           <el-menu-item
-            v-if="!ustate.online"
+            v-if="ustate.online"
             index="4"
             v-on:click="DialogVisible = 4"
             class="logout"
@@ -91,7 +91,7 @@
 
 <script>
 // registerUser, changePW, logOut
-import { registerUser, postUser } from '@/utils/communications';
+import { registerUser, postUser, changePW } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
 import { defaultmessages } from '@/store/HistoryStore';
 import { localStore } from '@/store/StorageLocal';
@@ -282,6 +282,27 @@ export default {
             localStore.save_json('userinfo', userinfo);
 
             this.tips(0, MES_SUCC, '登录成功!');
+            this.DialogVisible = 0;
+          } else {
+            this.userConnectVisible = false;
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
+          }
+        },
+        error => {
+          this.userConnectVisible = false;
+          this.error_handle(error);
+        }
+      );
+    },
+    // 6.修改密码
+    changepassword: function changepassword(password, new_password) {
+      this.userConnectVisible = true;
+      changePW(this.ustate.username, password, new_password).then(
+        Response => {
+          if (Response.status === 200 && Response.data.code === 200) {
+            // 密码修改成功成功
+            this.userConnectVisible = false;
+            this.tips(0, MES_SUCC, '密码修改成功!');
             this.DialogVisible = 0;
           } else {
             this.userConnectVisible = false;
