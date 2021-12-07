@@ -96,25 +96,25 @@ import {
   changePW,
   logOut,
   getHistory
-} from "@/utils/communications";
-import { ustore } from "@/store/UserStateStore";
-import { hstore } from "@/store/HistoryStore";
-import { localStore, get_token } from "@/store/StorageLocal";
-import Signup from "@/components/Signup";
-import Login from "@/components/Login";
-import ConfirmLogout from "@/components/ConfirmLogout";
-import ChangePw from "@/components/ChangePassword";
-import ChooseBot from "@/components/ChooseBot";
-import ChatRoom from "@/components/ChatRoom";
+} from '@/utils/communications';
+import { ustore } from '@/store/UserStateStore';
+import { hstore } from '@/store/HistoryStore';
+import { localStore, get_token } from '@/store/StorageLocal';
+import Signup from '@/components/Signup';
+import Login from '@/components/Login';
+import ConfirmLogout from '@/components/ConfirmLogout';
+import ChangePw from '@/components/ChangePassword';
+import ChooseBot from '@/components/ChooseBot';
+import ChatRoom from '@/components/ChatRoom';
 
 let MES_INFO = 0;
 let MES_ERROR = 1;
 let MES_SUCC = 2;
-let USER_ERROR_INFO = "用户未登录或登录信息已过期,请重新登录";
-let UNKNOWN_ERROR_INFO = "发生未知异常,请检查网络连接或联系开发人员";
+let USER_ERROR_INFO = '用户未登录或登录信息已过期,请重新登录';
+let UNKNOWN_ERROR_INFO = '发生未知异常,请检查网络连接或联系开发人员';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Signup,
     Login,
@@ -125,7 +125,7 @@ export default {
   },
   data() {
     return {
-      query: "",
+      query: '',
       DialogVisible: 0,
       DrawVisible: false,
       loadingVisible: false,
@@ -140,8 +140,8 @@ export default {
       console.log(error);
       let respnose = error.response;
       if (
-        typeof respnose === "undefined" ||
-        typeof respnose.status === "undefined"
+        typeof respnose === 'undefined' ||
+        typeof respnose.status === 'undefined'
       ) {
         // 1.1 未知错误1
         this.user_tips(500, 500, MES_ERROR, UNKNOWN_ERROR_INFO);
@@ -154,9 +154,9 @@ export default {
         this.user_tips(0, 0, MES_ERROR, USER_ERROR_INFO);
         // 后端反馈登录状态过期,则前端需清除用户相关信息
         ustore.set_online(false);
-        ustore.set_user("请登录");
+        ustore.set_user('请登录');
         this.DialogVisible = 0;
-        localStore.remove_json("userinfo");
+        localStore.remove_json('userinfo');
       } else {
         // 1.4 未知错误信息2
         this.user_tips(400, 400, MES_ERROR, UNKNOWN_ERROR_INFO);
@@ -167,24 +167,24 @@ export default {
       this.timer = setTimeout(() => {
         if (message_type === MES_ERROR) {
           this.$notify.error({
-            position: "top-left",
+            position: 'top-left',
             offset: 100,
             duration: 1000,
-            title: "错误提示",
+            title: '错误提示',
             message: _message
           });
         } else if (message_type === MES_INFO) {
           this.$notify.info({
-            position: "top-left",
-            title: "提示",
+            position: 'top-left',
+            title: '提示',
             offset: 100,
             duration: 1000,
             message: _message
           });
         } else if (message_type === MES_SUCC) {
           this.$notify.success({
-            position: "top-left",
-            title: "提示",
+            position: 'top-left',
+            title: '提示',
             offset: 100,
             duration: 1000,
             message: _message
@@ -205,24 +205,24 @@ export default {
       this.timer = setTimeout(() => {
         if (message_type === MES_ERROR) {
           this.$notify.error({
-            position: "top-left",
+            position: 'top-left',
             offset: 100,
             duration: 1000,
-            title: "错误提示",
+            title: '错误提示',
             message: _message
           });
         } else if (message_type === MES_INFO) {
           this.$notify.info({
-            position: "top-left",
-            title: "提示",
+            position: 'top-left',
+            title: '提示',
             offset: 100,
             duration: 1000,
             message: _message
           });
         } else if (message_type === MES_SUCC) {
           this.$notify.success({
-            position: "top-left",
-            title: "提示",
+            position: 'top-left',
+            title: '提示',
             offset: 100,
             duration: 1000,
             message: _message
@@ -233,20 +233,20 @@ export default {
     // 4.进入聊天
     choseABot: function choseABot(index) {
       if (!ustore.state.online) {
-        this.tips(0, MES_INFO, "请先登录~");
+        this.tips(0, MES_INFO, '请先登录~');
         return;
       }
       this.DrawVisible = true;
       ustore.set_bot(index);
 
-      // console.log("Home history:", hstore.state[index - 1]);
+      // console.log('Home history:', hstore.state[index - 1]);
       this.$refs.ctroom.getHistory(hstore.state[index - 1]);
     },
     // 4.注册
     toLogin: function toLogin(username, password) {
-      console.log("signup");
+      console.log('signup');
       if (username.length > 20 || password.length > 20) {
-        this.tips(0, MES_INFO, "用户名和密码最长为20个字符,请检查!");
+        this.tips(0, MES_INFO, '用户名和密码最长为20个字符,请检查!');
         return;
       }
       // 注册并转到登录界面
@@ -257,11 +257,11 @@ export default {
             // 信息传入后端，如是已注册用户则登陆成功，如果不是，alert显示用户名不存在，如果用户名存在，密码不存在，alert显示密码错误
             // 登录成功
             this.userConnectVisible = false;
-            this.tips(0, MES_SUCC, "注册成功!");
+            this.tips(0, MES_SUCC, '注册成功!');
             // 转到登录界面
             this.DialogVisible = 2;
           } else {
-            this.user_tips(500, 500, MES_ERROR, "未知错误");
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
         error => {
@@ -275,7 +275,7 @@ export default {
       postUser(username, password).then(
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
-            console.log("login successfully!");
+            console.log('login successfully!');
             // 登录成功
             this.userConnectVisible = false;
             let userinfo = {
@@ -284,22 +284,22 @@ export default {
             // 设置登录状态
             ustore.set_user(userinfo.username);
             ustore.set_online(true);
-            localStore.save_json("userinfo", userinfo);
+            localStore.save_json('userinfo', userinfo);
 
-            this.tips(0, MES_SUCC, "登录成功!");
+            this.tips(0, MES_SUCC, '登录成功!');
 
             // 登录后读取历史记录
             hstore.clear();
             hstore.add_default_message();
             getHistory(ustore.state.username).then(
-              Response => {
-                if (Response.status === 200 && Response.data.code === 200) {
-                  let historys = Response.data.data;
-                  for (let i = 0; i < historys.length; i++) {
+              Response2 => {
+                if (Response2.status === 200 && Response2.data.code === 200) {
+                  let historys = Response2.data.data;
+                  for (let i = 0; i < historys.length; i += 1) {
                     hstore.add_historys(historys[i]);
                   }
                 } else {
-                  this.tips(500, 500, MES_ERROR, "获取历史记录失败");
+                  this.tips(500, 500, MES_ERROR, '获取历史记录失败');
                 }
               },
               error => {
@@ -309,7 +309,7 @@ export default {
             this.DialogVisible = 0;
           } else {
             this.userConnectVisible = false;
-            this.user_tips(500, 500, MES_ERROR, "未知错误");
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
         error => {
@@ -326,11 +326,11 @@ export default {
           if (Response.status === 200 && Response.data.code === 200) {
             // 密码修改成功成功
             this.userConnectVisible = false;
-            this.tips(0, MES_SUCC, "密码修改成功!");
+            this.tips(0, MES_SUCC, '密码修改成功!');
             this.DialogVisible = 0;
           } else {
             this.userConnectVisible = false;
-            this.user_tips(500, 500, MES_ERROR, "未知错误");
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
         error => {
@@ -346,12 +346,12 @@ export default {
           if (Response.status === 200 && Response.data.code === 200) {
             // 退出成功
             ustore.set_online(false);
-            ustore.set_user("请登录");
+            ustore.set_user('请登录');
             this.DialogVisible = 0;
-            localStore.remove_json("userinfo");
-            this.tips(100, MES_INFO, "已退出登录");
+            localStore.remove_json('userinfo');
+            this.tips(100, MES_INFO, '已退出登录');
           } else {
-            this.user_tips(500, 500, MES_ERROR, "未知错误");
+            this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
         error => {
@@ -362,18 +362,18 @@ export default {
   },
   created() {
     // 初始化时从本地存储读取用户信息,若存在用户信息但cookie中的token已过期,则退出登录并删除数据
-    let userinfo = localStore.get_json("userinfo");
-    if (typeof userinfo.username !== "undefined") {
+    let userinfo = localStore.get_json('userinfo');
+    if (typeof userinfo.username !== 'undefined') {
       ustore.set_user(userinfo.username);
       ustore.set_online(true);
       let uname = get_token(document.cookie);
-      if (uname === "") {
+      if (uname === '') {
         ustore.set_online(false);
-        ustore.set_user("请登录");
+        ustore.set_user('请登录');
         this.DialogVisible = 0;
-        localStore.remove_json("userinfo");
-        this.$alert("会话已过期,请重新登录", "提示", {
-          confirmButtonText: "确定"
+        localStore.remove_json('userinfo');
+        this.$alert('会话已过期,请重新登录', '提示', {
+          confirmButtonText: '确定'
         });
       }
     }
