@@ -12,7 +12,7 @@ describe('UserStateStore.js', () => {
     }),
     it('ustore', () => {
         expect(ustore.state).toEqual({
-            username: 'Lixy',
+            username: '请登录',
             botname: '小闲',
             botindex: 0,
             online: false
