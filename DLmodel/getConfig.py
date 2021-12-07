@@ -1,4 +1,4 @@
-
+"""doctring"""
 from configparser import SafeConfigParser
 
 def get_config(config_file='data/seq2seq.ini'):

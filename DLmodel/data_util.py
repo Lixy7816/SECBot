@@ -1,11 +1,12 @@
-﻿
+﻿"""doctring"""
 # coding=utf-8
 
 import os
-import jieba
+import sys
 from zhon.hanzi import punctuation
 import re
 from . import getConfig
+import jieba
 # 用jieba分词
 
 # 读取配置
@@ -15,7 +16,7 @@ conv_path = gConfig['resource_data']
 
 if not os.path.exists(conv_path):
     print('No resource data here')
-    exit()
+    sys.exit()
 
 # 识别读取训练集的数据并存入一个List中,分三步:
 #  1.打开文件
