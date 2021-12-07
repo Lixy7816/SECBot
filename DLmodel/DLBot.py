@@ -7,8 +7,7 @@ import jieba
 def botReply(input):
     req_msg=" ".join(jieba.cut(input))
     try:
-        res_msg = ''
-        # res_msg = execute.predict(req_msg)
+        res_msg = execute.predict(req_msg)
     except:
         res_msg = ''
     res_msg = res_msg.replace('_UNK', '^_^')
