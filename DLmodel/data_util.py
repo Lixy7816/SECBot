@@ -1,10 +1,9 @@
 ﻿
 # coding=utf-8
-
 import os
 import jieba
-from zhon.hanzi import punctuation
 import re
+from zhon.hanzi import punctuation
 from . import getConfig
 # 用jieba分词
 

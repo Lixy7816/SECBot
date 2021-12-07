@@ -21,8 +21,7 @@ class Encoder(tf.keras.Model):
 
   def initialize_hidden_state(self):
     return tf.zeros((self.batch_sz, self.enc_units))
- 
-  
+
 class BahdanauAttention(tf.keras.Model):
   def __init__(self, units):
     super(BahdanauAttention, self).__init__()
