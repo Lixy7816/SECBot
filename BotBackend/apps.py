@@ -1,3 +1,4 @@
+"""doctring"""
 from django.apps import AppConfig
 
 
