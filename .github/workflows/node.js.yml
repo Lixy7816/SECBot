@@ -20,14 +20,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: get files
-      run : cp -rf BotFront/* ./
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    # - uses: actions/checkout@v2
+    # - name: get files
+    #   run : cp -rf BotFront/* ./
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
     - name: style-test
       run : echo $(ls)
     - name: Unittest
