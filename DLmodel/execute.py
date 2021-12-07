@@ -34,13 +34,15 @@ def max_length(tensor):
     return max(len(t) for t in tensor)
 
 def read_data(path,num_examples):
+    try:
+        input_lang,target_lang = create_dataset(path,num_examples)
 
-    input_lang,target_lang = create_dataset(path,num_examples)
+        input_tensor,input_token=tokenize(input_lang)
+        target_tensor,target_token=tokenize(target_lang)
 
-    input_tensor,input_token=tokenize(input_lang)
-    target_tensor,target_token=tokenize(target_lang)
-
-    return input_tensor,input_token,target_tensor,target_token
+        return input_tensor,input_token,target_tensor,target_token
+    except:
+        return [],[],[],[]
 
 def tokenize(lang):
     lang_tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=gConfig['enc_vocab_size'], oov_token=3)
