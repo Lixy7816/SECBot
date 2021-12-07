@@ -1,0 +1,4 @@
+this is a test document
+def hello_name(name):
+  greet = "Hello , "
+  return greet + name.title()
