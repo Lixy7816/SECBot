@@ -1,1 +1,16 @@
-the first test
+#the first test
+
+
+#coding=utf-8　
+
+import unittest
+from execute import preprocess_sentence
+
+class preprocess_sentenceTest(unittest.TestCase):
+"""用于测试preprocess_sentence函数"""
+def test_preprocess_sentence(self):
+ """是否能正确处理Joker 这个名字"""
+    preprocess_sentence_str = preprocess_sentence('Joker')
+    self.assertEqual(preprocess_sentence_str,'start Joker end')
+
+    unittest.main()
