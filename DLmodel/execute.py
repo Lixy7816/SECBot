@@ -10,13 +10,14 @@ from . import getConfig
 
 gConfig = {}
 
+
 gConfig = getConfig.get_config()
 
 vocab_inp_size = gConfig['enc_vocab_size']
 vocab_tar_size = gConfig['dec_vocab_size']
-embedding_dim=gConfig['embedding_dim']
-units=gConfig['layer_size']
-BATCH_SIZE=gConfig['batch_size']
+embedding_dim = gConfig['embedding_dim']
+units = gConfig['layer_size']
+BATCH_SIZE = gConfig['batch_size']
 max_length_inp,max_length_tar=20,20
 
 def preprocess_sentence(w):
