@@ -28,5 +28,6 @@ module.exports = {
     '!src/main.js',
     '!src/router/index.js',
     '!**/node_modules/**',
+    '!**/specs/**'
   ]
 }
