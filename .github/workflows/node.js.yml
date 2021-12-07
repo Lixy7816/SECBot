@@ -21,11 +21,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: echo $(ls)
-    - run: cd BotFront
-    - run: echo "$PATH"
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node/BotFront@v2
+    - run: cd BotFront
+    - run: echo $(ls)
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
