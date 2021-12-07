@@ -50,7 +50,7 @@ export var hstore = {
     for (let index = 0; index < 5; index += 1) {
       this.state[index].push({
         pk: 0,
-        username: ustore.state.botname.slice(8),
+        username: botnames[index].slice(8),
         text: defaultmessages[index].text,
         pos: 1
       });
