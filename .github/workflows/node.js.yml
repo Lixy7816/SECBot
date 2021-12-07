@@ -21,9 +21,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: get files
+      run : cp -rf BotFront/* ./
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
-      working-directory: ./BotFront
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
