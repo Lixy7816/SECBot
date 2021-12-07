@@ -49,18 +49,18 @@ def gen_token(username):
     return token_string
 
 
-def renew_token(token_string):
-    '''renew_token'''
+'''def renew_token(token_string):
+    #renew_token
     Token.objects.filter(token=token_string)
-
-def gen_user_info(username):
-    '''generate response'''
+'''
+'''def gen_user_info(username):
+    #generate response
     user = User.objects.filter(username=username).first()
     return {'id': user.id,
             'username': user.username,
             'password': user.password,
             'is_manager': user.is_manager}
-
+'''
 
 def gen_response(code, data, username=None):
     '''generate response'''
@@ -149,9 +149,9 @@ def sign_out(request):
     return gen_response(200, '')
 
 
-@csrf_exempt
+#@csrf_exempt
 def modify_password(request):
-    '''modify_password'''
+    #modify_password
     token_string = request.COOKIES.get("token")
     username = get_username_from_token(token_string)
     if not username:
@@ -171,9 +171,9 @@ def modify_password(request):
     User.objects.filter(username=username, password=password).update(password=new_password)
     return gen_response(200, {}, user.username)
 
-@csrf_exempt
+#@csrf_exempt
 def view_history(request):
-    '''view_history'''
+    #view_history
     token_string = request.COOKIES.get("token")
     print(request.COOKIES)
     username = get_username_from_token(token_string)

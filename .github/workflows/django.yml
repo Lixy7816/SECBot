@@ -13,7 +13,11 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
+<<<<<<< HEAD
+        python-version: 3.8
+=======
         python-version: [3.7.10]
+>>>>>>> 615c230f63c92650f8db2a2a87af81d5d349104d
 
     steps:
     - uses: actions/checkout@v2
