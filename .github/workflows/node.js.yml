@@ -25,7 +25,7 @@ jobs:
     - run: cd BotFront
     - run: echo "$PATH"
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/BotFront/setup-node@v2
+      uses: actions/setup-node/BotFront@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
