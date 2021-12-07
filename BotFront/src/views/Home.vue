@@ -105,6 +105,8 @@ import ChatRoom from '@/components/ChatRoom';
 let MES_INFO = 0;
 let MES_ERROR = 1;
 let MES_SUCC = 2;
+let USER_ERROR_INFO = '用户未登录或登录信息已过期,请重新登录';
+let UNKNOWN_ERROR_INFO = '发生未知异常,请检查网络连接或联系开发人员';
 
 export default {
   name: 'Home',
@@ -130,8 +132,27 @@ export default {
   methods: {
     // 1.错误处理代码
     error_handle: function error_handle(error) {
-      // TODO: 补全错误处理
       console.log(error);
+      let respnose = error.response;
+      if (typeof (respnose) === 'undefined' || typeof (respnose.status) === 'undefined') {
+        // 1.1 未知错误1
+        this.user_tips(500, 500, MES_ERROR, UNKNOWN_ERROR_INFO);
+      } else if (respnose.status === 400) {
+        // 1.2 通用错误信息
+        let data = respnose.data.data;
+        this.user_tips(0, 0, MES_ERROR, data);
+      } else if (respnose.status === 401) {
+        // 1.3 用户未登录或登录过期问题
+        this.user_tips(0, 0, MES_ERROR, USER_ERROR_INFO);
+        // 后端反馈登录状态过期,则前端需清除用户相关信息
+        ustore.set_online(false);
+        ustore.set_user('请登录');
+        this.DialogVisible = 0;
+        localStore.remove_json('userinfo');
+      } else {
+        // 1.4 未知错误信息2
+        this.user_tips(400, 400, MES_ERROR, UNKNOWN_ERROR_INFO);
+      }
     },
     // 2.通用提示信息
     tips: function tips(wait_time, message_type, _message) {
