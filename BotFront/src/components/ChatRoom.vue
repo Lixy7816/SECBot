@@ -22,6 +22,7 @@
 <script>
 import Avatar from 'vue-avatar';
 import ChatList from '@/components/ChatList';
+import { hstore } from '@/store/HistoryStore';
 import { ustore } from '@/store/UserStateStore';
 import { sendMessage } from '@/utils/communications';
 
@@ -115,6 +116,7 @@ export default {
         that.send();
       }
     };
+    that.getHistory(hstore.state[ustore.state.botindex]);
   }
 };
 </script>
