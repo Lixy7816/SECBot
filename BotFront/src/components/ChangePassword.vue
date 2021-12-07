@@ -70,11 +70,14 @@ export default {
       this.$emit('cancel');
     },
     confirm: function confirm(formName) {
+      console.log('cp1');
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log('cp2');
           this.$emit('confirm', this.ruleForm.old_password, this.ruleForm.password);
           return true;
         }
+        console.log('cp3');
         return false;
       });
     }

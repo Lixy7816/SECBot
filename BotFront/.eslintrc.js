@@ -59,6 +59,8 @@ module.exports = {
     'no-var':["off"],
     'import/no-mutable-exports':["off"],
     'no-useless-return':['off'],
-    'no-else-return':['off']
+    'no-else-return':['off'],
+    'import/prefer-default-export':['off'],
+    'object-shorthand':['off']
   }
 }

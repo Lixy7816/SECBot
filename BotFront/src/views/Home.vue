@@ -91,10 +91,10 @@
 
 <script>
 // registerUser, changePW, logOut
-import { postUser } from '@/utils/communications';
+import { registerUser, postUser } from '@/utils/communications';
 import { ustore } from '@/store/UserStateStore';
 import { defaultmessages } from '@/store/HistoryStore';
-import { localStore } from '@/store/StorageLocal'
+import { localStore } from '@/store/StorageLocal';
 import Signup from '@/components/Signup';
 import Login from '@/components/Login';
 import ConfirmLogout from '@/components/ConfirmLogout';
@@ -134,7 +134,7 @@ export default {
       console.log(error);
     },
     // 2.通用提示信息
-    tips: function (wait_time, message_type, _message) {
+    tips: function tips(wait_time, message_type, _message) {
       this.timer = setTimeout(() => {
         if (message_type === MES_ERROR) {
           this.$notify.error({
@@ -143,7 +143,7 @@ export default {
             duration: 1000,
             title: '错误提示',
             message: _message
-          })
+          });
         } else if (message_type === MES_INFO) {
           this.$notify.info({
             position: 'top-left',
@@ -151,7 +151,7 @@ export default {
             offset: 100,
             duration: 1000,
             message: _message
-          })
+          });
         } else if (message_type === MES_SUCC) {
           this.$notify.success({
             position: 'top-left',
@@ -159,9 +159,9 @@ export default {
             offset: 100,
             duration: 1000,
             message: _message
-          })
+          });
         }
-      }, wait_time)
+      }, wait_time);
     },
     // 3.用户提示信息
     user_tips: function user_tips(
@@ -216,7 +216,8 @@ export default {
       this.$refs.ctroom.getHistory(history);
     },
     // 4.注册
-    toLogin: function (username, password) {
+    toLogin: function toLogin(username, password) {
+      console.log('signup');
       if (username.length > 20 || password.length > 20) {
         this.tips(0, MES_INFO, '用户名和密码最长为20个字符,请检查!');
         return;
@@ -237,9 +238,9 @@ export default {
           }
         },
         error => {
-          this.error_handle(error, USER);
+          this.error_handle(error);
         }
-      )
+      );
     },
     // 5.登录
     login: function login(username, password) {
@@ -251,21 +252,23 @@ export default {
             // 登录成功
             this.userConnectVisible = false;
             // TODO: 修改本地保存的用户数据
-            var userinfo = {
+            let userinfo = {
               username: username
-            }
+            };
             // 设置登录状态
-            ustore.set_user(userinfo.username)
-            ustore.set_online(true)
-            localStore.save_json('userinfo', userinfo)
+            ustore.set_user(userinfo.username);
+            ustore.set_online(true);
+            localStore.save_json('userinfo', userinfo);
 
             this.tips(0, MES_SUCC, '登录成功!');
             this.DialogVisible = 0;
           } else {
+            this.userConnectVisible = false;
             this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
         error => {
+          this.userConnectVisible = false;
           this.error_handle(error);
         }
       );

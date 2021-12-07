@@ -1,6 +1,6 @@
 '''urls'''
 from django.urls import path
-from .views import sign_up, sign_in, sign_out, modify_password, view_history
+from .views import sign_up, sign_in, sign_out, modify_password
 
 urlpatterns = [
     path('sign_up', sign_up, name='sign_up'),

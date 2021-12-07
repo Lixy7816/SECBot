@@ -42,7 +42,7 @@ export default {
     }
   },
   data() {
-    let validatePass2 = (value, callback) => {
+    let validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
       } else if (value !== this.ruleForm.password) {
