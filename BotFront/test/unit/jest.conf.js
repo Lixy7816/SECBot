@@ -26,8 +26,11 @@ module.exports = {
     'src/**/*.{js,vue}',
     '!src/mock/*',
     '!src/main.js',
+    '!src/app.vue',
     '!src/router/index.js',
     '!**/node_modules/**',
-    '!**/specs/**'
+    '!**/specs/**',
+    'root/**',
+    'unknown'
   ]
 }

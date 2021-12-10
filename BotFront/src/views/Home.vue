@@ -125,12 +125,9 @@ export default {
   },
   data() {
     return {
-      query: '',
       DialogVisible: 0,
       DrawVisible: false,
-      loadingVisible: false,
       userConnectVisible: false,
-      dialogVisible_logout: false,
       ustate: ustore.state
     };
   },
@@ -238,8 +235,6 @@ export default {
       }
       this.DrawVisible = true;
       ustore.set_bot(index);
-
-      // console.log('Home history:', hstore.state[index - 1]);
       this.$refs.ctroom.getHistory(hstore.state[index - 1]);
     },
     // 4.注册
@@ -274,18 +269,10 @@ export default {
       this.userConnectVisible = true;
       postUser(username, password).then(
         Response => {
+          this.userConnectVisible = false;
           if (Response.status === 200 && Response.data.code === 200) {
-            console.log('login successfully!');
-            // 登录成功
-            this.userConnectVisible = false;
-            let userinfo = {
-              username: username
-            };
-            // 设置登录状态
-            ustore.set_user(userinfo.username);
-            ustore.set_online(true);
-            localStore.save_json('userinfo', userinfo);
-
+            // 登录成功,设置登录状态
+            this.setUserState(username, true);
             this.tips(0, MES_SUCC, '登录成功!');
 
             // 登录后读取历史记录
@@ -308,7 +295,6 @@ export default {
             );
             this.DialogVisible = 0;
           } else {
-            this.userConnectVisible = false;
             this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
@@ -323,13 +309,12 @@ export default {
       this.userConnectVisible = true;
       changePW(this.ustate.username, password, new_password).then(
         Response => {
+          this.userConnectVisible = false;
           if (Response.status === 200 && Response.data.code === 200) {
             // 密码修改成功成功
-            this.userConnectVisible = false;
             this.tips(0, MES_SUCC, '密码修改成功!');
             this.DialogVisible = 0;
           } else {
-            this.userConnectVisible = false;
             this.user_tips(500, 500, MES_ERROR, '未知错误');
           }
         },
@@ -345,10 +330,8 @@ export default {
         Response => {
           if (Response.status === 200 && Response.data.code === 200) {
             // 退出成功
-            ustore.set_online(false);
-            ustore.set_user('请登录');
+            this.setUserState('请登录', false);
             this.DialogVisible = 0;
-            localStore.remove_json('userinfo');
             this.tips(100, MES_INFO, '已退出登录');
           } else {
             this.user_tips(500, 500, MES_ERROR, '未知错误');
@@ -358,20 +341,55 @@ export default {
           this.error_handle(error);
         }
       );
+    },
+    // 8.设置用户状态
+    setUserState: function setUserState(username, online) {
+      ustore.set_online(online);
+      ustore.set_user(username);
+      if (online === false) {
+        localStore.remove_json('userinfo');
+      } else {
+        let userinfo = {
+          username: username
+        };
+        localStore.save_json('userinfo', userinfo);
+      }
+    },
+    // 9.处理History数据
+    processHistorys: function processHistorys(historys) {
+      let len = historys.length;
+      let result = [];
+      let tmp = [];
+      // 赋予数组副本
+      for (let i = 0; i < len; i += 1) {
+        result.push(historys[i]);
+      }
+      for (let i = 0; i < len; i += 1) {
+        tmp.push(result[i]);
+      }
+      for (let i = 0; i < len; i += 1) {
+        result[i] = tmp[len - i - 1];
+      }
+      let ans = [];
+      for (let i = 0; i < len; i += 1) {
+        let history = result[i];
+        ans.push({
+          history: history,
+          pk: ans.length
+        });
+      }
+      return ans;
     }
   },
   created() {
     // 初始化时从本地存储读取用户信息,若存在用户信息但cookie中的token已过期,则退出登录并删除数据
     let userinfo = localStore.get_json('userinfo');
     if (typeof userinfo.username !== 'undefined') {
-      ustore.set_user(userinfo.username);
-      ustore.set_online(true);
+      this.setUserState(userinfo.username, true);
       let uname = get_token(document.cookie);
       if (uname === '') {
-        ustore.set_online(false);
-        ustore.set_user('请登录');
+        this.setUserState('请登录', false);
         this.DialogVisible = 0;
-        localStore.remove_json('userinfo');
         this.$alert('会话已过期,请重新登录', '提示', {
           confirmButtonText: '确定'
         });

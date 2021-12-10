@@ -46,6 +46,15 @@ export var hstore = {
     this.add_one_history(botindex, botname, answer, 1);
     return;
   },
+  add_one_default_message(index) {
+    this.state[index].push({
+      pk: 0,
+      username: botnames[index].slice(8),
+      text: defaultmessages[index].text,
+      pos: 1
+    });
+    return;
+  },
   add_default_message() {
     for (let index = 0; index < 5; index += 1) {
       this.state[index].push({
