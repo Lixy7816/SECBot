@@ -139,7 +139,7 @@ export default {
   },
   data() {
     return {
-      DialogVisible: 0,
+      DialogVisible: 5,
       DrawVisible: false,
       userConnectVisible: false,
       ustate: ustore.state
