@@ -26,6 +26,5 @@ describe('UserStateStore.js', () => {
             botindex: 1,
             online: true
         })
-        ustore.set_bot(8)
     })
 })
