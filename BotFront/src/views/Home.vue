@@ -28,6 +28,11 @@
       v-on:confirm="logout"
       ref="confirmLogout_dialog"
     />
+    <Notice
+      v-bind:dialogVisible="DialogVisible == 5"
+      v-on:cancel="DialogVisible = 0"
+      ref="notice_dialog"
+    />
     <el-container>
       <el-header>
         <el-menu
@@ -52,15 +57,22 @@
             >登录</el-menu-item
           >
           <el-menu-item
-            v-if="ustate.online"
+            v-if="true"
             index="3"
+            v-on:click="DialogVisible = 5"
+            class="notice"
+            >功能说明</el-menu-item
+          >
+          <el-menu-item
+            v-if="ustate.online"
+            index="4"
             v-on:click="DialogVisible = 3"
             class="changePw"
             >修改密码</el-menu-item
           >
           <el-menu-item
             v-if="ustate.online"
-            index="4"
+            index="5"
             v-on:click="DialogVisible = 4"
             class="logout"
             >退出登录</el-menu-item
@@ -106,6 +118,7 @@ import ConfirmLogout from '@/components/ConfirmLogout';
 import ChangePw from '@/components/ChangePassword';
 import ChooseBot from '@/components/ChooseBot';
 import ChatRoom from '@/components/ChatRoom';
+import Notice from '@/components/Notice';
 
 let MES_INFO = 0;
 let MES_ERROR = 1;
@@ -121,7 +134,8 @@ export default {
     ChangePw,
     ConfirmLogout,
     ChooseBot,
-    ChatRoom
+    ChatRoom,
+    Notice
   },
   data() {
     return {
